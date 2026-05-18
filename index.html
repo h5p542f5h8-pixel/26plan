@@ -495,7 +495,24 @@
                 font-size: 1.5em;
             }
         }
-    </style>
+    
+            .control-btn {
+            background: #ffc107 !important;
+            color: #333 !important;
+            border: 1px solid #e0a800;
+        }
+        .control-btn:hover {
+            background: #e0a800 !important;
+        }
+        .content.is-locked {
+            opacity: 0.35;
+            pointer-events: none;
+            filter: grayscale(0.6);
+        }
+        .controls.is-locked {
+            pointer-events: auto;
+            opacity: 1;
+        }</style>
 </head>
 <body>
     <div class="container">
@@ -533,6 +550,7 @@
             <button onclick="resetFilters()">Reset</button>
             <button class="secondary" onclick="exportToCSV()">📥 CSV</button>
             <button class="secondary" onclick="saveToLocalStorage()">💾 Save</button>
+                        <button id="lockToggleBtn" class="control-btn" onclick="toggleLock()">🔓 Unlocked</button>
         </div>
 
         <div class="content">
@@ -1165,6 +1183,88 @@
         updateStats();
         populateFilters();
         renderWeeks();
-    </script>
+
+        // === EXTREME PATCH 3: LOCK SYSTEM ===
+    const STORAGE_KEY_HASH = 'plan_pin_hash';
+    const STORAGE_KEY_LOCKED = 'plan_locked';
+    let isLocked = false;
+
+    async function sha256(pin) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(pin);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function initLockSystem() {
+        const storedHash = localStorage.getItem(STORAGE_KEY_HASH);
+        const storedLocked = localStorage.getItem(STORAGE_KEY_LOCKED);
+        isLocked = storedLocked === 'true';
+
+        // Mapping: .edit-run-section -> .content (the editing area)
+        const editArea = document.querySelector('.content');
+        const btn = document.getElementById('lockToggleBtn');
+
+        function applyLockUI() {
+            if (editArea) {
+                if (isLocked) {
+                    editArea.classList.add('is-locked');
+                    document.querySelector('.controls').classList.add('is-locked');
+                    if (btn) btn.textContent = '🔒 Locked';
+                } else {
+                    editArea.classList.remove('is-locked');
+                    document.querySelector('.controls').classList.remove('is-locked');
+                    if (btn) btn.textContent = '🔓 Unlocked';
+                }
+            }
+        }
+
+        function setPinAndLock(pin) {
+            sha256(pin).then(hash => {
+                localStorage.setItem(STORAGE_KEY_HASH, hash);
+                isLocked = true;
+                localStorage.setItem(STORAGE_KEY_LOCKED, 'true');
+                applyLockUI();
+            });
+        }
+
+        // Toggle lock/unlock
+        window.toggleLock = async function() {
+            const btn = document.getElementById('lockToggleBtn');
+            if (!isLocked) {
+                // Lock it
+                if (!storedHash) {
+                    const pin = prompt('Set a PIN to lock the plan (stored as SHA-256 hash):');
+                    if (pin) setPinAndLock(pin);
+                } else {
+                    isLocked = true;
+                    localStorage.setItem(STORAGE_KEY_LOCKED, 'true');
+                    applyLockUI();
+                }
+            } else {
+                // Unlock it
+                const pin = prompt('Enter PIN to unlock:');
+                if (pin && storedHash) {
+                    const pinHash = await sha256(pin);
+                    if (pinHash === storedHash) {
+                        isLocked = false;
+                        localStorage.setItem(STORAGE_KEY_LOCKED, 'false');
+                        applyLockUI();
+                    } else {
+                        alert('Incorrect PIN');
+                    }
+                }
+            }
+        };
+
+        // Apply initial state
+        applyLockUI();
+    }
+
+    // === EXTREME PATCH 4: DOMContentLoaded hook ===
+    document.addEventListener('DOMContentLoaded', initLockSystem);
+
+</script>
 </body>
 </html>
