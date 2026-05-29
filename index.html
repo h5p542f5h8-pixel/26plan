@@ -517,14 +517,14 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏔️ 2026 Ultra Plan (V1.5 - Fixed)</h1>
+            <h1>🏔️ 2026 Ultra Plan (V1.6)</h1>
             <p style="font-size:0.9em; margin-top:10px;">Oxford Ultra · Kranjska · Bournemouth 50K · Oxford Half</p>
         </div>
 
         <div class="view-toggle">
             <button id="laptopBtn" onclick="switchView('laptop')">💻 Laptop View</button>
             <button id="mobileBtn" class="active" onclick="switchView('mobile')">📱 Mobile View</button>
-            <button id="showCompletedBtn" onclick="toggleShowCompleted()">👁️ Show Completed</button>
+            <button id="showCompletedBtn" onclick="toggleShowCompleted()">🙈 Hide Completed</button>
         </div>
 
         <div class="controls">
@@ -559,7 +559,7 @@
 
             <div class="export-section">
                 <h3>✅ Plan loaded - All issues fixed!</h3>
-                <p>📱 Default: Mobile mode + Completed runs hidden • Drag/Drop • Edit • Lock</p>
+                <p>📱 Default: Mobile mode + Completed runs HIDDEN • Drag/Drop • Edit • Lock</p>
                 <p style="margin-top:10px; font-size:0.9em;">79 training sessions loaded successfully</p>
             </div>
         </div>
@@ -899,7 +899,6 @@
         window.onload = () => {
             populateFilters();
             switchView('mobile');
-            if(!showCompleted) toggleShowCompleted();
             renderWeeks();
             initLockSystem();
         };
