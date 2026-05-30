@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Ultra Training Plan · 2026 (V1.5)</title>
+    <title>Ultra Training Plan · 2026 (V1.6)</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 800px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
@@ -37,32 +37,6 @@
         .header h1 {
             font-size: 2em;
             margin-bottom: 5px;
-        }
-
-        .view-toggle {
-            padding: 10px 20px;
-            background: #343a40;
-            color: white;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .view-toggle button {
-            padding: 8px 20px;
-            border: 2px solid white;
-            background: transparent;
-            color: white;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .view-toggle button.active {
-            background: white;
-            color: #343a40;
         }
 
         .controls {
@@ -87,17 +61,11 @@
             font-size: 0.9em;
         }
 
-        select, input[type="text"], input[type="number"], input[type="date"], input[type="checkbox"], button {
+        select, input[type="text"], button {
             padding: 8px 12px;
             border: 1px solid #ced4da;
             border-radius: 5px;
             font-size: 14px;
-        }
-
-        input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
         }
 
         select:focus, input:focus {
@@ -129,31 +97,13 @@
             background: #218838;
         }
 
-        button.complete-btn {
-            background: #28a745;
-            font-size: 0.85em;
-        }
-
-        button.complete-btn:hover {
-            background: #218838;
-        }
-
-        button.uncomplete-btn {
-            background: #6c757d;
-            font-size: 0.85em;
-        }
-
-        button.uncomplete-btn:hover {
-            background: #5a6268;
-        }
-
         .content {
             padding: 20px;
         }
 
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 15px;
             margin-bottom: 20px;
         }
@@ -171,7 +121,7 @@
         }
 
         .stat-card h3 {
-            font-size: 1.8em;
+            font-size: 1.5em;
             margin-bottom: 5px;
         }
 
@@ -192,46 +142,14 @@
             color: white;
             padding: 12px 15px;
             font-weight: 600;
-            font-size: 1em;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .phase-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85em;
+            font-size: 0.95em;
         }
 
         .runs-list {
             background: white;
         }
 
-        .run-item.desktop-view {
-            padding: 15px;
-            border-bottom: 1px solid #e9ecef;
-            display: grid;
-            grid-template-columns: 40px 80px 100px 100px 80px 120px 1fr 250px 140px;
-            gap: 15px;
-            align-items: center;
-            cursor: move;
-            transition: all 0.3s;
-        }
-
-        .run-item.completed {
-            opacity: 0.6;
-            background: #e8f5e9;
-        }
-
-        .run-item.completed.desktop-view {
-            text-decoration: line-through;
-        }
-
-        .run-item.mobile-view {
+        .run-item {
             padding: 15px;
             border-bottom: 1px solid #e9ecef;
             display: flex;
@@ -241,20 +159,9 @@
             transition: all 0.3s;
         }
 
-        .mobile-view .mobile-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .mobile-view .mobile-main {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .mobile-view .mobile-full {
-            grid-column: 1 / -1;
+        .run-item.completed {
+            opacity: 0.6;
+            background: #e8f5e9;
         }
 
         .run-item:hover {
@@ -291,55 +198,48 @@
             background: #fffacd;
         }
 
+        .mobile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .mobile-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .mobile-full {
+            grid-column: 1 / -1;
+        }
+
         .day-badge {
             background: #667eea;
             color: white;
-            padding: 8px 12px;
+            padding: 6px 12px;
             border-radius: 5px;
             text-align: center;
             font-weight: 600;
             font-size: 0.85em;
-            cursor: pointer;
             white-space: nowrap;
-        }
-
-        .day-badge:hover {
-            background: #764ba2;
         }
 
         .run-type {
             font-weight: 600;
             color: #495057;
-            font-size: 0.95em;
         }
 
         .distance {
             color: #667eea;
             font-weight: 600;
-            font-size: 0.95em;
-            cursor: pointer;
-        }
-
-        .distance:hover {
-            text-decoration: underline;
-        }
-
-        .run-time {
-            color: #28a745;
-            font-weight: 600;
-            font-size: 0.9em;
-        }
-
-        .run-time-label {
-            font-size: 0.75em;
-            color: #6c757d;
-            display: block;
         }
 
         .pace {
             color: #6c757d;
             font-size: 0.85em;
-            margin-bottom: 5px;
         }
 
         .notes {
@@ -351,18 +251,11 @@
         .terrain {
             color: #6c757d;
             font-size: 0.8em;
-            line-height: 1.3;
         }
 
         .date-display {
             color: #495057;
             font-size: 0.85em;
-            cursor: pointer;
-        }
-
-        .date-display:hover {
-            color: #667eea;
-            text-decoration: underline;
         }
 
         .actions {
@@ -374,6 +267,7 @@
         .actions button {
             padding: 5px 10px;
             font-size: 0.85em;
+            flex: 1;
         }
 
         .modal {
@@ -444,87 +338,30 @@
             flex: 1;
         }
 
+        .completion-badge {
+            background: #28a745;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+
         .export-section {
             margin-top: 25px;
             padding: 20px;
             background: #f8f9fa;
             border-radius: 10px;
             text-align: center;
-        }
-
-        .drag-handle {
-            cursor: move;
-            color: #6c757d;
-            font-size: 1.2em;
-        }
-
-        .details-column {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .completion-badge {
-            background: #28a745;
-            color: white;
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 0.75em;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-
-        .control-btn {
-            background: #ffc107 !important;
-            color: #333 !important;
-            border: 1px solid #e0a800;
-        }
-
-        .control-btn:hover {
-            background: #e0a800 !important;
-        }
-
-        .content.is-locked {
-            opacity: 0.35;
-            pointer-events: none;
-            filter: grayscale(0.6);
-        }
-
-        .controls.is-locked {
-            pointer-events: auto;
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.5em;
-            }
-
-            .controls {
-                padding: 10px;
-            }
-
-            .stat-card h3 {
-                font-size: 1.5em;
-            }
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏔️ 2026 Ultra Plan (V1.6)</h1>
+            <h1>🏔️ 2026 Ultra Plan (V1.6 Deload)</h1>
             <p style="font-size:0.9em; margin-top:10px;">Oxford Ultra · Kranjska · Bournemouth 50K · Oxford Half</p>
-        </div>
-
-        <div class="view-toggle">
-            <button id="laptopBtn" onclick="switchView('laptop')">💻 Laptop View</button>
-            <button id="mobileBtn" class="active" onclick="switchView('mobile')">📱 Mobile View</button>
-            <button id="showCompletedBtn" onclick="toggleShowCompleted()">🙈 Hide Completed</button>
         </div>
 
         <div class="controls">
@@ -548,9 +385,8 @@
             </div>
 
             <button onclick="resetFilters()">Reset</button>
+            <button class="secondary" onclick="toggleShowCompleted()" id="toggleBtn">🙈 Hide</button>
             <button class="secondary" onclick="exportToCSV()">📥 CSV</button>
-            <button class="secondary" onclick="saveToLocalStorage()">💾 Save</button>
-            <button id="lockToggleBtn" class="control-btn" onclick="toggleLock()">🔓 Unlocked</button>
         </div>
 
         <div class="content">
@@ -558,9 +394,8 @@
             <div id="weeksContainer"></div>
 
             <div class="export-section">
-                <h3>✅ Plan loaded - All issues fixed!</h3>
-                <p>📱 Default: Mobile mode + Completed runs HIDDEN • Drag/Drop • Edit • Lock</p>
-                <p style="margin-top:10px; font-size:0.9em;">79 training sessions loaded successfully</p>
+                <h3>✅ Plan loaded - V6 Deload Edition</h3>
+                <p>📱 Mobile optimized · Drag/Drop · Edit · 79 sessions</p>
             </div>
         </div>
     </div>
@@ -581,44 +416,32 @@
                         <option value="Sun">Sunday</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label>Date (DD/MM/YYYY):</label>
                     <input type="text" id="editDate" placeholder="DD/MM/YYYY">
                 </div>
-
                 <div class="form-group">
                     <label>Run Type:</label>
                     <input type="text" id="editType">
                 </div>
-
                 <div class="form-group">
                     <label>Distance (km):</label>
                     <input type="number" id="editDistance" step="any" min="0">
                 </div>
-
-                <div class="form-group">
-                    <label>Distance (miles):</label>
-                    <input type="number" id="editDistanceMiles" step="any" min="0">
-                </div>
-
                 <div class="form-group">
                     <label>Pace:</label>
                     <input type="text" id="editPace" placeholder="e.g., 6:15-6:50/km">
                 </div>
-
                 <div class="form-group">
                     <label>Terrain:</label>
                     <input type="text" id="editTerrain">
                 </div>
-
                 <div class="form-group">
                     <label>Notes:</label>
                     <textarea id="editNotes"></textarea>
                 </div>
-
                 <div class="modal-actions">
-                    <button type="submit" class="secondary">Save Changes</button>
+                    <button type="submit" class="secondary">Save</button>
                     <button type="button" onclick="closeModal()">Cancel</button>
                 </div>
             </form>
@@ -633,66 +456,66 @@
             {Week:2,Run:4,Date:"28/05/2026",Days_Since_Surgery:115,Day:"Thu",Phase:"Post-Brighton recovery",Type:"Steady",Distance_km:14,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Tempo / marathon effort; hill aerobic strength"},
             {Week:2,Run:5,Date:"30/05/2026",Days_Since_Surgery:117,Day:"Sat",Phase:"Post-Brighton recovery",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Fuel practice; time on feet"},
             {Week:3,Run:6,Date:"01/06/2026",Days_Since_Surgery:119,Day:"Mon",Phase:"Base build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
-            {Week:3,Run:7,Date:"02/06/2026",Days_Since_Surgery:120,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / measured path",Notes:"Hill-strength session for climbing economy"},
+            {Week:3,Run:7,Date:"02/06/2026",Days_Since_Surgery:120,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"5:45-6:45/km reps",Terrain:"Hill route / track / measured path",Notes:"1km run , 30 mins of reps,  remaining  is zone 3 run"},
             {Week:3,Run:8,Date:"04/06/2026",Days_Since_Surgery:122,Day:"Thu",Phase:"Base build",Type:"Steady",Distance_km:16,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic strength"},
-            {Week:3,Run:9,Date:"06/06/2026",Days_Since_Surgery:124,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Fuel practice; time on feet"},
+            {Week:3,Run:9,Date:"06/06/2026",Days_Since_Surgery:124,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Long Run: Initial Baseline (10/1 Strategy practice)"},
             {Week:4,Run:10,Date:"08/06/2026",Days_Since_Surgery:126,Day:"Mon",Phase:"Base build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
-            {Week:4,Run:11,Date:"09/06/2026",Days_Since_Surgery:127,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / measured path",Notes:"Hill-strength session for climbing economy"},
+            {Week:4,Run:11,Date:"09/06/2026",Days_Since_Surgery:127,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"5:35-6:35/km reps",Terrain:"Hill route / track / measured path",Notes:"1km run , 30 mins of reps,  remaining  is zone 3 run"},
             {Week:4,Run:12,Date:"11/06/2026",Days_Since_Surgery:129,Day:"Thu",Phase:"Base build",Type:"Steady",Distance_km:16,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic strength"},
-            {Week:4,Run:13,Date:"13/06/2026",Days_Since_Surgery:131,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Fuel practice; time on feet"},
+            {Week:4,Run:13,Date:"13/06/2026",Days_Since_Surgery:131,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:33,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Long Run: Step-up progression (10/1 Strategy practice)"},
             {Week:5,Run:14,Date:"15/06/2026",Days_Since_Surgery:133,Day:"Mon",Phase:"Base build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
-            {Week:5,Run:15,Date:"16/06/2026",Days_Since_Surgery:134,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"Hill-strength session for climbing economy"},
+            {Week:5,Run:15,Date:"16/06/2026",Days_Since_Surgery:134,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"5:25-6:25/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"1km run , 30 mins of reps,  remaining  is zone 3 run"},
             {Week:5,Run:16,Date:"18/06/2026",Days_Since_Surgery:136,Day:"Thu",Phase:"Base build",Type:"Steady",Distance_km:16,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic strength"},
-            {Week:5,Run:17,Date:"20/06/2026",Days_Since_Surgery:138,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Fuel practice; time on feet"},
+            {Week:5,Run:17,Date:"20/06/2026",Days_Since_Surgery:138,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:36,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Long Run: Peak of Micro-cycle (10/1 Strategy practice)"},
             {Week:6,Run:18,Date:"22/06/2026",Days_Since_Surgery:140,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
-            {Week:6,Run:19,Date:"23/06/2026",Days_Since_Surgery:141,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"Hill-strength session for climbing economy"},
+            {Week:6,Run:19,Date:"23/06/2026",Days_Since_Surgery:141,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:20-6:20/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"1km run , 30 mins of reps,  remaining  is zone 3 run"},
             {Week:6,Run:20,Date:"25/06/2026",Days_Since_Surgery:143,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic strength"},
-            {Week:6,Run:21,Date:"27/06/2026",Days_Since_Surgery:145,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:38,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Fuel practice; time on feet"},
+            {Week:6,Run:21,Date:"27/06/2026",Days_Since_Surgery:145,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"MANDATORY DELOAD WEEK — Recovery, aerobic structural absorption"},
             {Week:7,Run:22,Date:"29/06/2026",Days_Since_Surgery:147,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
-            {Week:7,Run:23,Date:"30/06/2026",Days_Since_Surgery:148,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"Hill-strength session for climbing economy"},
+            {Week:7,Run:23,Date:"30/06/2026",Days_Since_Surgery:148,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:10-6:10/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"1km run , 30 mins of reps,  remaining  is zone 3 run"},
             {Week:7,Run:24,Date:"02/07/2026",Days_Since_Surgery:150,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic strength"},
-            {Week:7,Run:25,Date:"04/07/2026",Days_Since_Surgery:152,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:38,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Fuel practice; time on feet"},
+            {Week:7,Run:25,Date:"04/07/2026",Days_Since_Surgery:152,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:38,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Long Run: New Volume Baseline (9/1 Strategy practice)"},
             {Week:8,Run:26,Date:"06/07/2026",Days_Since_Surgery:154,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
-            {Week:8,Run:27,Date:"07/07/2026",Days_Since_Surgery:155,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"Hill-strength session for climbing economy"},
+            {Week:8,Run:27,Date:"07/07/2026",Days_Since_Surgery:155,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:00-6:00/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"1km run , 30 mins of reps,  remaining  is zone 3 run"},
             {Week:8,Run:28,Date:"09/07/2026",Days_Since_Surgery:157,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic strength"},
-            {Week:8,Run:29,Date:"11/07/2026",Days_Since_Surgery:159,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:38,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Fuel practice; time on feet"},
+            {Week:8,Run:29,Date:"11/07/2026",Days_Since_Surgery:159,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:40,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Long Run: Peak Ultra Distance (9/1 Strategy practice)"},
             {Week:9,Run:30,Date:"13/07/2026",Days_Since_Surgery:161,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
-            {Week:9,Run:31,Date:"14/07/2026",Days_Since_Surgery:162,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"Hill-strength session for climbing economy"},
+            {Week:9,Run:31,Date:"14/07/2026",Days_Since_Surgery:162,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:00-5:50/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"1km run , 30 mins of reps,  remaining  is zone 3 run"},
             {Week:9,Run:32,Date:"16/07/2026",Days_Since_Surgery:164,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic strength"},
-            {Week:9,Run:33,Date:"18/07/2026",Days_Since_Surgery:166,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:38,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Fuel practice; time on feet"},
+            {Week:9,Run:33,Date:"18/07/2026",Days_Since_Surgery:166,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:24,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"MANDATORY DELOAD WEEK — Recovery and joint preservation before back-to-back block"},
             {Week:10,Run:34,Date:"20/07/2026",Days_Since_Surgery:168,Day:"Mon",Phase:"Peak ultra",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Flat road or soft trail",Notes:"Recovery + mobility (UK)"},
-            {Week:10,Run:35,Date:"22/07/2026",Days_Since_Surgery:170,Day:"Wed",Phase:"Peak ultra",Type:"Hill quality",Distance_km:14,Pace:"4:20-5:15/km reps",Terrain:"Kefalos Old Town",Notes:"Early Morning (06:30): Climbing block before peak heat"},
+            {Week:10,Run:35,Date:"22/07/2026",Days_Since_Surgery:170,Day:"Wed",Phase:"Peak ultra",Type:"Hill quality",Distance_km:14,Pace:"5:00-6:00/km reps",Terrain:"Kefalos Old Town",Notes:"Early Morning (06:30): Climbing block before peak heat"},
             {Week:10,Run:36,Date:"23/07/2026",Days_Since_Surgery:171,Day:"Thu",Phase:"Peak ultra",Type:"Steady",Distance_km:12,Pace:"By Effort / HR",Terrain:"Flat coastal roads",Notes:"Late Morning (10:00 AM): Heat Acclimatization 1"},
-            {Week:10,Run:37,Date:"24/07/2026",Days_Since_Surgery:172,Day:"Fri",Phase:"Peak ultra",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail/Road mix",Notes:"Early Morning (06:00 AM): Peak Block Part 1"},
-            {Week:10,Run:38,Date:"25/07/2026",Days_Since_Surgery:173,Day:"Sat",Phase:"Peak ultra",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail/Road mix",Notes:"Early Morning (06:00 AM): Peak Block Part 2"},
-            {Week:11,Run:39,Date:"27/07/2026",Days_Since_Surgery:175,Day:"Mon",Phase:"Peak ultra",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Flat road or soft trail",Notes:"Early Morning: Light recovery miles to flush legs"},
-            {Week:11,Run:40,Date:"28/07/2026",Days_Since_Surgery:176,Day:"Tue",Phase:"Peak ultra",Type:"Hill quality",Distance_km:16,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track",Notes:"Early Morning: Structured hill session"},
+            {Week:10,Run:37,Date:"24/07/2026",Days_Since_Surgery:172,Day:"Fri",Phase:"Peak ultra",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail/Road mix",Notes:"Early Morning (06:00 AM): Peak Block Part 1 - Aggressive fuel/carb practice"},
+            {Week:10,Run:38,Date:"25/07/2026",Days_Since_Surgery:173,Day:"Sat",Phase:"Peak ultra",Type:"Long",Distance_km:22,Pace:"6:00-7:00/km",Terrain:"Trail/Road mix",Notes:"Early Morning (06:00 AM): Peak Block Part 2 - Residual fatigue - Fuel practice"},
+            {Week:11,Run:39,Date:"27/07/2026",Days_Since_Surgery:175,Day:"Mon",Phase:"Peak ultra",Type:"Zone 2",Distance_km:12,Pace:"5:50-6:50/km",Terrain:"Flat road or soft trail",Notes:"Early Morning: Light recovery miles to flush legs"},
+            {Week:11,Run:40,Date:"28/07/2026",Days_Since_Surgery:176,Day:"Tue",Phase:"Peak ultra",Type:"Hill quality",Distance_km:16,Pace:"5:00-5:50/km reps",Terrain:"Hill route / track",Notes:"Early Morning: Structured hill session for climbing economy"},
             {Week:11,Run:41,Date:"29/07/2026",Days_Since_Surgery:177,Day:"Wed",Phase:"Peak ultra",Type:"Steady",Distance_km:12,Pace:"By Effort / HR",Terrain:"Flat coastal roads",Notes:"Late Morning (10:00 AM): Heat Acclimatization 2"},
-            {Week:11,Run:42,Date:"31/07/2026",Days_Since_Surgery:179,Day:"Fri",Phase:"Peak ultra",Type:"Steady",Distance_km:16,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"UK Morning: Back on home turf"},
-            {Week:11,Run:43,Date:"01/08/2026",Days_Since_Surgery:180,Day:"Sat",Phase:"Peak ultra",Type:"Long",Distance_km:44,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Fuel practice; time on feet"},
+            {Week:11,Run:42,Date:"31/07/2026",Days_Since_Surgery:179,Day:"Fri",Phase:"Peak ultra",Type:"Steady",Distance_km:16,Pace:"5:15-5:50/km",Terrain:"Rolling road or trail",Notes:"UK Morning: Back on home turf, testing fresh heat adaptations"},
+            {Week:11,Run:43,Date:"01/08/2026",Days_Since_Surgery:180,Day:"Sat",Phase:"Peak ultra",Type:"Long",Distance_km:26,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"SHARP RACE TAPER WEEK — Flush legs, fully top off glycogen reserves"},
             {Week:12,Run:44,Date:"03/08/2026",Days_Since_Surgery:182,Day:"Mon",Phase:"Oxford Ultra race week",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
             {Week:12,Run:45,Date:"04/08/2026",Days_Since_Surgery:183,Day:"Tue",Phase:"Oxford Ultra race week",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"Taper: keep fresh, no deep fatigue"},
             {Week:21,Run:46,Date:"07/08/2026",Days_Since_Surgery:186,Day:"Fri",Phase:"Oxford Ultra Race",Type:"Race",Distance_km:79,Pace:"Race Pace",Terrain:"Race course",Notes:"MTC Oxford Ultra (Target Race)"},
             {Week:13,Run:47,Date:"10/08/2026",Days_Since_Surgery:189,Day:"Mon",Phase:"Recovery/reset",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
             {Week:13,Run:48,Date:"11/08/2026",Days_Since_Surgery:190,Day:"Tue",Phase:"Recovery/reset",Type:"Hill quality",Distance_km:7,Pace:"Controlled uphill reps",Terrain:"Hill route / track / measured path",Notes:"Short hill reps, keep fatigue low"},
-            {Week:13,Run:49,Date:"13/08/2026",Days_Since_Surgery:192,Day:"Thu",Phase:"Recovery/reset",Type:"Steady",Distance_km:14,Pace:"5:35-6:05/km",Terrain:"Technical Trail (Light)",Notes:"Bridge Session: Low-intensity technical trail movement"},
+            {Week:13,Run:49,Date:"13/08/2026",Days_Since_Surgery:192,Day:"Thu",Phase:"Recovery/reset",Type:"Steady",Distance_km:14,Pace:"6:15-7:15/km",Terrain:"Technical Trail (Light)",Notes:"Bridge Session: Low-intensity technical trail movement to keep glutes/calves active for Kranjska"},
             {Week:13,Run:50,Date:"15/08/2026",Days_Since_Surgery:194,Day:"Sat",Phase:"Recovery/reset",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Fuel practice; time on feet"},
             {Week:14,Run:51,Date:"17/08/2026",Days_Since_Surgery:196,Day:"Mon",Phase:"Recovery/reset",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
             {Week:14,Run:52,Date:"18/08/2026",Days_Since_Surgery:197,Day:"Tue",Phase:"Recovery/reset",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / measured path",Notes:"Hill reps, VO2, or cruise intervals"},
             {Week:14,Run:53,Date:"20/08/2026",Days_Since_Surgery:199,Day:"Thu",Phase:"Recovery/reset",Type:"Steady",Distance_km:14,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Tempo / marathon effort; hill aerobic strength"},
             {Week:14,Run:54,Date:"22/08/2026",Days_Since_Surgery:201,Day:"Sat",Phase:"Recovery/reset",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Fuel practice; time on feet"},
             {Week:15,Run:55,Date:"24/08/2026",Days_Since_Surgery:203,Day:"Mon",Phase:"Trail speed build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
-            {Week:15,Run:56,Date:"25/08/2026",Days_Since_Surgery:204,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Uphill intervals: focus on vertical efficiency"},
+            {Week:15,Run:56,Date:"25/08/2026",Days_Since_Surgery:204,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Uphill intervals: focus on vertical efficiency and downhill control"},
             {Week:15,Run:57,Date:"27/08/2026",Days_Since_Surgery:206,Day:"Thu",Phase:"Trail speed build",Type:"Steady",Distance_km:18,Pace:"5:25-5:55/km",Terrain:"Rolling trail",Notes:"Hill-focused aerobic strength"},
-            {Week:15,Run:58,Date:"29/08/2026",Days_Since_Surgery:208,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Specificity stacking: climbing/descending economy"},
+            {Week:15,Run:58,Date:"29/08/2026",Days_Since_Surgery:208,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Specificity stacking: climbing/descending economy for Kranjska"},
             {Week:16,Run:59,Date:"31/08/2026",Days_Since_Surgery:210,Day:"Mon",Phase:"Trail speed build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
-            {Week:16,Run:60,Date:"01/09/2026",Days_Since_Surgery:211,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Uphill intervals: focus on vertical efficiency"},
+            {Week:16,Run:60,Date:"01/09/2026",Days_Since_Surgery:211,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Uphill intervals: focus on vertical efficiency and downhill control"},
             {Week:16,Run:61,Date:"03/09/2026",Days_Since_Surgery:213,Day:"Thu",Phase:"Trail speed build",Type:"Steady",Distance_km:18,Pace:"5:25-5:55/km",Terrain:"Rolling trail",Notes:"Hill-focused aerobic strength"},
-            {Week:16,Run:62,Date:"05/09/2026",Days_Since_Surgery:215,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Specificity stacking: climbing/descending economy"},
+            {Week:16,Run:62,Date:"05/09/2026",Days_Since_Surgery:215,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Specificity stacking: climbing/descending economy for Kranjska"},
             {Week:17,Run:63,Date:"07/09/2026",Days_Since_Surgery:217,Day:"Mon",Phase:"Trail speed build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
-            {Week:17,Run:64,Date:"08/09/2026",Days_Since_Surgery:218,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Uphill intervals: focus on vertical efficiency"},
+            {Week:17,Run:64,Date:"08/09/2026",Days_Since_Surgery:218,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Uphill intervals: focus on vertical efficiency and downhill control"},
             {Week:17,Run:65,Date:"10/09/2026",Days_Since_Surgery:220,Day:"Thu",Phase:"Trail speed build",Type:"Steady",Distance_km:18,Pace:"5:25-5:55/km",Terrain:"Rolling trail",Notes:"Hill-focused aerobic strength"},
-            {Week:17,Run:66,Date:"12/09/2026",Days_Since_Surgery:222,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Specificity stacking: climbing/descending economy"},
+            {Week:17,Run:66,Date:"12/09/2026",Days_Since_Surgery:222,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Specificity stacking: climbing/descending economy for Kranjska"},
             {Week:18,Run:67,Date:"14/09/2026",Days_Since_Surgery:224,Day:"Mon",Phase:"Kranjska taper/race week",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
             {Week:18,Run:68,Date:"15/09/2026",Days_Since_Surgery:225,Day:"Tue",Phase:"Kranjska taper/race week",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / measured path",Notes:"Taper: short hill work, low fatigue"},
             {Week:21,Run:69,Date:"20/09/2026",Days_Since_Surgery:230,Day:"Sun",Phase:"Kranjska Race",Type:"Race",Distance_km:25,Pace:"Race Pace",Terrain:"Mountain trail course",Notes:"Kranjska Gora 25KM"},
@@ -704,203 +527,187 @@
             {Week:20,Run:75,Date:"29/09/2026",Days_Since_Surgery:239,Day:"Tue",Phase:"Bournemouth build/taper",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / measured path",Notes:"Hill reps, VO2, or cruise intervals"},
             {Week:20,Run:76,Date:"03/10/2026",Days_Since_Surgery:243,Day:"Sat",Phase:"Bournemouth Race",Type:"Race",Distance_km:50,Pace:"Aim 6h moving / 11h incl breaks",Terrain:"Coastal ultra course",Notes:"Bournemouth 50K race day"},
             {Week:21,Run:77,Date:"05/10/2026",Days_Since_Surgery:245,Day:"Mon",Phase:"Half taper",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
-            {Week:21,Run:78,Date:"06/10/2026",Days_Since_Surgery:246,Day:"Tue",Phase:"Half taper",Type:"Speed Quality",Distance_km:7,Pace:"4 x 2km @ 5:12/km w/ 2 min recovery",Terrain:"Flat Road / Track",Notes:"Neural sharpening: lock in HM pace"},
+            {Week:21,Run:78,Date:"06/10/2026",Days_Since_Surgery:246,Day:"Tue",Phase:"Half taper",Type:"Speed Quality",Distance_km:7,Pace:"4 x 2km @ 5:12/km w/ 2 min recovery",Terrain:"Flat Road / Track",Notes:"Neural sharpening: lock in HM pace; keep legs snappy"},
             {Week:21,Run:79,Date:"11/10/2026",Days_Since_Surgery:251,Day:"Sun",Phase:"Half taper",Type:"Race",Distance_km:21.1,Pace:"5:12/km",Terrain:"Road half marathon course",Notes:"Oxford Half Marathon (Goal 1:50)"}
         ];
 
         let trainingData = freshRunsData.map(run => ({...run, completed: false}));
-
         const savedData = localStorage.getItem('trainingPlanDEV_v2');
         if (savedData) {
             try {
                 const saved = JSON.parse(savedData);
                 if (Array.isArray(saved) && saved.length === trainingData.length) {
-                    saved.forEach((s, i) => { if(s && typeof s.completed === 'boolean') trainingData[i].completed = s.completed; });
+                    saved.forEach((s, i) => { if(s?.completed) trainingData[i].completed = true; });
                 }
             } catch(e) {}
         }
 
-        let currentEditIndex = null;
-        let draggedElement = null;
-        let draggedIndex = null;
-        let currentView = 'mobile';
-        let showCompleted = false;
-
-        function switchView(view) {
-            currentView = view;
-            document.getElementById('laptopBtn').classList.toggle('active', view === 'laptop');
-            document.getElementById('mobileBtn').classList.toggle('active', view === 'mobile');
-            renderWeeks();
-        }
+        let currentEditIndex = null, draggedIndex = null, showCompleted = false;
 
         function toggleShowCompleted() {
             showCompleted = !showCompleted;
-            const btn = document.getElementById('showCompletedBtn');
-            btn.classList.toggle('active', showCompleted);
-            btn.textContent = showCompleted ? '👁️ Show Completed' : '🙈 Hide Completed';
+            document.getElementById('toggleBtn').textContent = showCompleted ? '👁️ Show' : '🙈 Hide';
             renderWeeks();
         }
 
-        function markComplete(index) {
-            trainingData[index].completed = true;
-            saveToLocalStorage();
-            renderWeeks();
-            updateStats();
-        }
-
-        function markIncomplete(index) {
-            trainingData[index].completed = false;
-            saveToLocalStorage();
-            renderWeeks();
-            updateStats();
-        }
-
-        function calculateRunTime(paceStr, distanceKm) {
-            if (!paceStr || paceStr === '-' || !distanceKm) return { min: null, max: null };
-            try {
-                if (paceStr.includes('-') && paceStr.includes('/km')) {
-                    const paceRange = paceStr.replace('/km', '').trim();
-                    const parts = paceRange.split('-');
-                    const paceToMinutes = (pace) => { const [mins, secs] = pace.trim().split(':'); return parseFloat(mins) + parseFloat(secs) / 60; };
-                    const minPace = paceToMinutes(parts[0]), maxPace = paceToMinutes(parts[1]);
-                    const d = parseFloat(distanceKm);
-                    return { min: minPace * d, max: maxPace * d };
-                }
-            } catch(e) {}
-            return { min: null, max: null };
-        }
-
-        function formatTime(minutes) {
-            if (!minutes && minutes !== 0) return '-';
-            const hours = Math.floor(minutes / 60);
-            const mins = Math.floor(minutes % 60);
-            return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
-        }
+        function markComplete(i) { trainingData[i].completed = true; saveToLocalStorage(); renderWeeks(); updateStats(); }
+        function markIncomplete(i) { trainingData[i].completed = false; saveToLocalStorage(); renderWeeks(); updateStats(); }
 
         function saveToLocalStorage() { 
             localStorage.setItem('trainingPlanDEV_v2', JSON.stringify(trainingData.map(({completed}) => ({completed}))));
         }
 
         function updateStats() {
-            const totalRuns = trainingData.length;
-            const completedRuns = trainingData.filter(run => run.completed).length;
-            const remainingRuns = totalRuns - completedRuns;
-            const totalDistance = trainingData.reduce((sum, run) => sum + (parseFloat(run.Distance_km) || 0), 0);
-            const completedDistance = trainingData.reduce((sum, run) => run.completed ? sum + (parseFloat(run.Distance_km) || 0) : sum, 0);
-            const races = trainingData.filter(run => run.Type === 'Race').length;
+            const total = trainingData.length;
+            const completed = trainingData.filter(r => r.completed).length;
+            const totalDist = trainingData.reduce((s, r) => s + (parseFloat(r.Distance_km) || 0), 0);
+            const compDist = trainingData.filter(r => r.completed).reduce((s, r) => s + (parseFloat(r.Distance_km) || 0), 0);
+            const races = trainingData.filter(r => r.Type === 'Race').length;
+            
             document.getElementById('statsContainer').innerHTML = `
-                <div class="stat-card"><h3>${totalRuns}</h3><p>Total Runs</p></div>
-                <div class="stat-card completed"><h3>${completedRuns}</h3><p>Completed ✅</p></div>
-                <div class="stat-card"><h3>${remainingRuns}</h3><p>Remaining</p></div>
-                <div class="stat-card"><h3>${totalDistance.toFixed(1)} km</h3><p>Total Distance</p></div>
-                <div class="stat-card completed"><h3>${completedDistance.toFixed(1)} km</h3><p>Completed Distance</p></div>
-                <div class="stat-card"><h3>${races}</h3><p>Race Days</p></div>
+                <div class="stat-card"><h3>${total}</h3><p>Total</p></div>
+                <div class="stat-card completed"><h3>${completed}</h3><p>Done ✅</p></div>
+                <div class="stat-card"><h3>${(total - completed)}</h3><p>Left</p></div>
+                <div class="stat-card"><h3>${totalDist.toFixed(0)}km</h3><p>Total</p></div>
+                <div class="stat-card completed"><h3>${compDist.toFixed(0)}km</h3><p>Done</p></div>
+                <div class="stat-card"><h3>${races}</h3><p>Races</p></div>
             `;
         }
 
         function populateFilters() {
-            const phases = new Set(trainingData.map(run => run.Phase));
-            const types = new Set(trainingData.map(run => run.Type));
-            const phaseFilter = document.getElementById('phaseFilter');
-            const typeFilter = document.getElementById('typeFilter');
-            phases.forEach(p => { const opt = document.createElement('option'); opt.value = p; opt.textContent = p; phaseFilter.appendChild(opt); });
-            types.forEach(t => { const opt = document.createElement('option'); opt.value = t; opt.textContent = t; typeFilter.appendChild(opt); });
+            const phases = [...new Set(trainingData.map(r => r.Phase))];
+            const types = [...new Set(trainingData.map(r => r.Type))];
+            const pf = document.getElementById('phaseFilter');
+            const tf = document.getElementById('typeFilter');
+            phases.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = p; pf.appendChild(o); });
+            types.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; tf.appendChild(o); });
         }
 
         function renderWeeks() {
-            const phaseVal = document.getElementById('phaseFilter').value;
-            const typeVal = document.getElementById('typeFilter').value;
-            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const pf = document.getElementById('phaseFilter').value;
+            const tf = document.getElementById('typeFilter').value;
+            const search = document.getElementById('searchBox').value.toLowerCase();
             let filtered = trainingData.filter(r => showCompleted || !r.completed);
-            if(phaseVal !== 'all') filtered = filtered.filter(r => r.Phase === phaseVal);
-            if(typeVal !== 'all') filtered = filtered.filter(r => r.Type === typeVal);
-            if(searchTerm) filtered = filtered.filter(r => JSON.stringify(r).toLowerCase().includes(searchTerm));
+            if(pf !== 'all') filtered = filtered.filter(r => r.Phase === pf);
+            if(tf !== 'all') filtered = filtered.filter(r => r.Type === tf);
+            if(search) filtered = filtered.filter(r => JSON.stringify(r).toLowerCase().includes(search));
             
-            const weekGroups = {};
-            filtered.forEach((run, idx) => { 
-                const w = run.Week; 
-                if(!weekGroups[w]) weekGroups[w]=[]; 
-                weekGroups[w].push({...run, originalIndex: trainingData.indexOf(run)});
+            const wg = {};
+            filtered.forEach(run => { 
+                if(!wg[run.Week]) wg[run.Week] = []; 
+                wg[run.Week].push({...run, idx: trainingData.indexOf(run)});
             });
             
-            const container = document.getElementById('weeksContainer');
-            container.innerHTML = '';
-            Object.keys(weekGroups).sort((a,b)=>a-b).forEach(week => {
-                const runs = weekGroups[week];
-                const weekDiv = document.createElement('div');
-                weekDiv.className = 'week-container';
-                const phase = runs[0].Phase;
-                const weekTotal = runs.reduce((s,r)=>s+(parseFloat(r.Distance_km)||0),0);
-                const weekCompleted = runs.filter(r=>r.completed).length;
-                weekDiv.innerHTML = `<div class="week-header"><span>Week ${week} - ${weekTotal.toFixed(1)} km (${(weekTotal*0.621371).toFixed(1)} mi)${weekCompleted>0?` <span class="completion-badge">${weekCompleted}/${runs.length}</span>`:''}</span><span class="phase-badge">${phase}</span></div><div class="runs-list">${runs.map(run => {
-                    const miles = (parseFloat(run.Distance_km)*0.621371).toFixed(1);
-                    const isRace = run.Type === 'Race';
-                    const isCompleted = run.completed;
-                    const rt = calculateRunTime(run.Pace, run.Distance_km);
-                    const timeDisplay = rt.min ? `${formatTime(rt.min)} - ${formatTime(rt.max)}` : '-';
-                    if(currentView === 'mobile') {
-                        return `<div class="run-item mobile-view ${isRace?'race':''} ${isCompleted?'completed':''}" draggable="true" data-index="${run.originalIndex}" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)" ondrop="handleDrop(event)" ondragend="handleDragEnd(event)">
-                            <div class="mobile-header"><div style="display:flex; gap:10px; align-items:center;"><span class="drag-handle">⋮⋮</span><div class="day-badge">${run.Day}</div><span class="date-display">${run.Date}</span></div><div>${isCompleted?`<button class="uncomplete-btn" onclick="markIncomplete(${run.originalIndex})">↩️</button>`:`<button class="complete-btn" onclick="markComplete(${run.originalIndex})">✓</button>`}</div></div>
-                            <div class="mobile-main"><div><div class="run-type">${run.Type}</div><div class="distance">${run.Distance_km} km<br><small>${miles} mi</small></div></div><div><span class="run-time-label">Est. Time</span><div class="run-time">${timeDisplay}</div></div><div class="mobile-full"><div class="pace">${run.Pace||'-'}</div><div class="terrain">${run.Terrain||'-'}</div></div></div>
-                            <div style="display:flex; gap:5px;"><button class="secondary" onclick="editRun(${run.originalIndex})">Edit</button></div></div>`;
-                    } else {
-                        return `<div class="run-item desktop-view ${isRace?'race':''} ${isCompleted?'completed':''}" draggable="true" data-index="${run.originalIndex}" ondragstart="handleDragStart(event)" ondragover="handleDragOver(event)" ondrop="handleDrop(event)" ondragend="handleDragEnd(event)">
-                            <span class="drag-handle">⋮⋮</span><div class="day-badge">${run.Day}${isCompleted?' ✅':''}</div><div class="date-display">${run.Date}</div>
-                            <div class="run-type">${run.Type}</div><div class="distance">${run.Distance_km} km<br><small>${miles} mi</small></div>
-                            <div class="run-time"><span class="run-time-label">Est. Time</span><br>${timeDisplay}</div><div class="details-column"><div class="pace">${run.Pace||'-'}</div><div class="notes">${run.Notes||'-'}</div>
-                            <div class="terrain">${run.Terrain||'-'}</div><div class="actions">${isCompleted?`<button class="uncomplete-btn" onclick="markIncomplete(${run.originalIndex})">↩️</button>`:`<button class="complete-btn" onclick="markComplete(${run.originalIndex})">✓</button>`}<button class="secondary" onclick="editRun(${run.originalIndex})">Edit</button></div></div>`;
-                    }
+            const c = document.getElementById('weeksContainer');
+            c.innerHTML = '';
+            Object.keys(wg).sort((a,b) => a-b).forEach(w => {
+                const runs = wg[w];
+                const div = document.createElement('div');
+                div.className = 'week-container';
+                const wdist = runs.reduce((s, r) => s + (parseFloat(r.Distance_km) || 0), 0);
+                const wcomp = runs.filter(r => r.completed).length;
+                div.innerHTML = `<div class="week-header">Week ${w} • ${wdist.toFixed(0)}km${wcomp > 0 ? ` • ${wcomp} done` : ''}</div><div class="runs-list">${runs.map(r => {
+                    const mi = (r.Distance_km * 0.621371).toFixed(1);
+                    const isR = r.Type === 'Race';
+                    const isC = r.completed;
+                    return `<div class="run-item ${isR ? 'race' : ''} ${isC ? 'completed' : ''}" draggable="true" data-index="${r.idx}" ondragstart="dragStart(event)" ondrop="drop(event)" ondragover="dragOver(event)" ondragend="dragEnd(event)">
+                        <div class="mobile-header">
+                            <div style="display:flex; gap:8px; align-items:center;">
+                                <span class="day-badge">${r.Day}</span>
+                                <span style="font-weight:600;">${r.Type}</span>
+                            </div>
+                            <span class="date-display">${r.Date}</span>
+                        </div>
+                        <div class="mobile-main">
+                            <div><div class="distance">${r.Distance_km}km (${mi}mi)</div></div>
+                            <div><div class="run-time">${r.Pace || '-'}</div></div>
+                        </div>
+                        <div class="mobile-full"><div class="terrain">${r.Terrain || '-'}</div></div>
+                        <div class="mobile-full"><div class="notes">${r.Notes || '-'}</div></div>
+                        <div class="actions" style="justify-content:space-between;">
+                            <button class="secondary" style="flex:1;" onclick="editRun(${r.idx})">✏️ Edit</button>
+                            ${isC ? `<button class="secondary" style="flex:1; background:#6c757d;" onclick="markIncomplete(${r.idx})">↩️ Undo</button>` : `<button class="secondary" style="flex:1;" onclick="markComplete(${r.idx})">✅ Done</button>`}
+                        </div>
+                    </div>`;
                 }).join('')}</div>`;
-                container.appendChild(weekDiv);
+                c.appendChild(div);
             });
             updateStats();
         }
 
-        function handleDragStart(e) { draggedElement = e.target; draggedIndex = parseInt(e.target.closest('.run-item').dataset.index); e.target.closest('.run-item').classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; }
-        function handleDragOver(e) { e.preventDefault(); e.target.closest('.run-item')?.classList.add('drag-over'); e.dataTransfer.dropEffect = 'move'; }
-        function handleDrop(e) { e.preventDefault(); const dropTarget = e.target.closest('.run-item'); if(dropTarget && draggedElement !== dropTarget) { const dropIndex = parseInt(dropTarget.dataset.index); [trainingData[draggedIndex], trainingData[dropIndex]] = [trainingData[dropIndex], trainingData[draggedIndex]]; saveToLocalStorage(); renderWeeks(); } }
-        function handleDragEnd(e) { e.target.classList.remove('dragging'); document.querySelectorAll('.run-item').forEach(i => i.classList.remove('drag-over')); }
-        function editRun(idx) { currentEditIndex = idx; const r = trainingData[idx]; document.getElementById('editDay').value = r.Day; document.getElementById('editDate').value = r.Date; document.getElementById('editType').value = r.Type; document.getElementById('editDistance').value = r.Distance_km; document.getElementById('editDistanceMiles').value = (r.Distance_km * 0.621371).toFixed(2); document.getElementById('editPace').value = r.Pace; document.getElementById('editTerrain').value = r.Terrain; document.getElementById('editNotes').value = r.Notes; document.getElementById('editModal').classList.add('active'); }
+        function dragStart(e) { draggedIndex = parseInt(e.target.closest('.run-item').dataset.index); e.target.closest('.run-item').classList.add('dragging'); }
+        function dragOver(e) { e.preventDefault(); e.target.closest('.run-item')?.classList.add('drag-over'); }
+        function drop(e) { 
+            e.preventDefault(); 
+            const dropTarget = e.target.closest('.run-item');
+            if(dropTarget && draggedIndex !== null) {
+                const dropIdx = parseInt(dropTarget.dataset.index);
+                [trainingData[draggedIndex], trainingData[dropIdx]] = [trainingData[dropIdx], trainingData[draggedIndex]];
+                saveToLocalStorage();
+                renderWeeks();
+            }
+        }
+        function dragEnd(e) { document.querySelectorAll('.run-item').forEach(i => i.classList.remove('dragging', 'drag-over')); }
+
+        function editRun(i) { 
+            currentEditIndex = i; 
+            const r = trainingData[i]; 
+            document.getElementById('editDay').value = r.Day;
+            document.getElementById('editDate').value = r.Date;
+            document.getElementById('editType').value = r.Type;
+            document.getElementById('editDistance').value = r.Distance_km;
+            document.getElementById('editPace').value = r.Pace;
+            document.getElementById('editTerrain').value = r.Terrain;
+            document.getElementById('editNotes').value = r.Notes;
+            document.getElementById('editModal').classList.add('active');
+        }
+
         function closeModal() { document.getElementById('editModal').classList.remove('active'); currentEditIndex = null; }
-        document.getElementById('editForm').addEventListener('submit', function(e){ e.preventDefault(); const run = trainingData[currentEditIndex]; run.Day = document.getElementById('editDay').value; run.Date = document.getElementById('editDate').value; run.Type = document.getElementById('editType').value; run.Distance_km = parseFloat(document.getElementById('editDistance').value); run.Pace = document.getElementById('editPace').value; run.Terrain = document.getElementById('editTerrain').value; run.Notes = document.getElementById('editNotes').value; saveToLocalStorage(); closeModal(); renderWeeks(); });
-        document.getElementById('editDistance').addEventListener('input', function(){ const km=parseFloat(this.value); if(!isNaN(km)) document.getElementById('editDistanceMiles').value=(km*0.621371).toFixed(2); });
-        document.getElementById('editDistanceMiles').addEventListener('input', function(){ const mi=parseFloat(this.value); if(!isNaN(mi)) document.getElementById('editDistance').value=(mi/0.621371).toFixed(2); });
-        function resetFilters() { document.getElementById('phaseFilter').value='all'; document.getElementById('typeFilter').value='all'; document.getElementById('searchBox').value=''; renderWeeks(); }
-        function exportToCSV() { const headers = Object.keys(trainingData[0]); const csv = [headers.join(','), ...trainingData.map(row=>headers.map(h=>typeof row[h]==='string'?('"'+row[h].replace(/"/g,'""')+'"'):row[h]).join(','))].join('\n'); const blob=new Blob([csv],{type:'text/csv'}); const url=window.URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='training-plan.csv'; a.click(); }
+
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const r = trainingData[currentEditIndex];
+            r.Day = document.getElementById('editDay').value;
+            r.Date = document.getElementById('editDate').value;
+            r.Type = document.getElementById('editType').value;
+            r.Distance_km = parseFloat(document.getElementById('editDistance').value);
+            r.Pace = document.getElementById('editPace').value;
+            r.Terrain = document.getElementById('editTerrain').value;
+            r.Notes = document.getElementById('editNotes').value;
+            saveToLocalStorage();
+            renderWeeks();
+            closeModal();
+        });
+
+        function resetFilters() { 
+            document.getElementById('phaseFilter').value = 'all';
+            document.getElementById('typeFilter').value = 'all';
+            document.getElementById('searchBox').value = '';
+            renderWeeks();
+        }
+
+        function exportToCSV() { 
+            const headers = Object.keys(trainingData[0]).filter(k => k !== 'idx');
+            const csv = [headers.join(','), ...trainingData.map(r => headers.map(h => {
+                const v = r[h];
+                return typeof v === 'string' ? (v.includes(',') ? `"${v}"` : v) : v;
+            }).join(','))].join('\n');
+            const blob = new Blob([csv], {type: 'text/csv'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'training_plan.csv';
+            a.click();
+        }
+
         document.getElementById('phaseFilter').addEventListener('change', renderWeeks);
         document.getElementById('typeFilter').addEventListener('change', renderWeeks);
         document.getElementById('searchBox').addEventListener('input', renderWeeks);
-        document.getElementById('editModal').addEventListener('click', e=>{ if(e.target===document.getElementById('editModal')) closeModal(); });
-
-        const STORAGE_KEY_HASH = 'plan_pin_hash';
-        const STORAGE_KEY_LOCKED = 'plan_locked';
-        let isLocked = false;
-        async function sha256(pin) { const enc = new TextEncoder(); const data = enc.encode(pin); const hash = await crypto.subtle.digest('SHA-256', data); return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,'0')).join(''); }
-        async function initLockSystem() {
-            const storedHash = localStorage.getItem(STORAGE_KEY_HASH);
-            const storedLocked = localStorage.getItem(STORAGE_KEY_LOCKED);
-            isLocked = storedLocked === 'true';
-            const editArea = document.querySelector('.content');
-            const btn = document.getElementById('lockToggleBtn');
-            function applyLockUI() { if(editArea){ if(isLocked){ editArea.classList.add('is-locked'); document.querySelector('.controls').classList.add('is-locked'); if(btn) btn.textContent='🔒 Locked'; } else { editArea.classList.remove('is-locked'); document.querySelector('.controls').classList.remove('is-locked'); if(btn) btn.textContent='🔓 Unlocked'; } } }
-            window.toggleLock = async function() {
-                if(!isLocked) {
-                    if(!storedHash){ const pin=prompt('Set a PIN to lock the plan:'); if(pin){ const hash=await sha256(pin); localStorage.setItem(STORAGE_KEY_HASH,hash); isLocked=true; localStorage.setItem(STORAGE_KEY_LOCKED,'true'); applyLockUI(); } }
-                    else { isLocked=true; localStorage.setItem(STORAGE_KEY_LOCKED,'true'); applyLockUI(); }
-                } else {
-                    const pin=prompt('Enter PIN to unlock:');
-                    if(pin && storedHash && await sha256(pin)===storedHash) { isLocked=false; localStorage.setItem(STORAGE_KEY_LOCKED,'false'); applyLockUI(); }
-                    else if(pin) alert('Incorrect PIN');
-                }
-            };
-            applyLockUI();
-        }
+        document.getElementById('editModal').addEventListener('click', e => { if(e.target === document.getElementById('editModal')) closeModal(); });
 
         window.onload = () => {
             populateFilters();
-            switchView('mobile');
             renderWeeks();
-            initLockSystem();
         };
     </script>
 </body>
