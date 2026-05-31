@@ -536,19 +536,26 @@
 
         let currentEditIndex = null, draggedIndex = null, showCompleted = false;
 
-        // Parse pace string and calculate estimated time
+        // Parse pace string and calculate estimated time using AVERAGE pace
         function estimateRunTime(distance, pace) {
             if (!pace || !distance) return null;
             
-            // Extract numbers from pace (handles ranges like "6:15-6:50/km" or single pace like "5:12/km")
-            const paceMatch = pace.match(/(\d+):(\d+)/);
-            if (!paceMatch) return null;
+            // Extract all time values from pace (handles ranges like "6:15-6:50/km" or single pace like "5:12/km")
+            const paceMatches = pace.match(/(\d+):(\d+)/g);
+            if (!paceMatches || paceMatches.length === 0) return null;
             
-            const minutes = parseInt(paceMatch[1]);
-            const seconds = parseInt(paceMatch[2]);
-            const pacePerKm = minutes + (seconds / 60);
+            // Parse all pace values
+            const paces = paceMatches.map(match => {
+                const parts = match.split(':');
+                const minutes = parseInt(parts[0]);
+                const seconds = parseInt(parts[1]);
+                return minutes + (seconds / 60);
+            });
             
-            const totalMinutes = distance * pacePerKm;
+            // Calculate average pace
+            const averagePace = paces.reduce((a, b) => a + b, 0) / paces.length;
+            
+            const totalMinutes = distance * averagePace;
             const hours = Math.floor(totalMinutes / 60);
             const mins = Math.round(totalMinutes % 60);
             
