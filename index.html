@@ -27,6 +27,35 @@
             overflow: hidden;
         }
 
+        .nav-bar {
+            background: #343a40;
+            padding: 10px 20px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            background: #495057;
+        }
+
+        .nav-bar a:hover {
+            background: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .nav-bar a.active {
+            background: #667eea;
+        }
+
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -351,6 +380,11 @@
 </head>
 <body>
     <div class="container">
+        <div class="nav-bar">
+            <a href="index.html" class="active">🏃 Training Plan</a>
+            <a href="fuelling.html">🍜 Fuelling Plan</a>
+        </div>
+
         <div class="header">
             <h1>🏔️ 2026 Ultra Plan (V1.6 Deload)</h1>
             <p style="font-size:0.9em; margin-top:10px;">Oxford Ultra · Kranjska · Bournemouth 50K · Oxford Half</p>
@@ -442,85 +476,85 @@
 
     <script>
         const freshRunsData = [
-            {Week:1,Run:1,Date:"18/05/2026",Days_Since_Surgery:105,Day:"Mon",Phase:"Post-Brighton recovery",Type:"Easy",Distance_km:10,Pace:"6:15-6:50/km",Terrain:"Flat road or soft trail",Notes:"Recovery + mobility"},
-            {Week:1,Run:2,Date:"22/05/2026",Days_Since_Surgery:110,Day:"Fri",Phase:"Post-Brighton recovery",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Long Run: Feel free to walk hills"},
-            {Week:2,Run:3,Date:"25/05/2026",Days_Since_Surgery:112,Day:"Mon",Phase:"Post-Brighton recovery",Type:"Zone 2",Distance_km:10,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Easy conversational pace"},
-            {Week:2,Run:4,Date:"28/05/2026",Days_Since_Surgery:115,Day:"Thu",Phase:"Post-Brighton recovery",Type:"Steady",Distance_km:14,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Tempo / marathon effort"},
-            {Week:2,Run:5,Date:"30/05/2026",Days_Since_Surgery:117,Day:"Sat",Phase:"Post-Brighton recovery",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Long Run: Feel free to walk hills"},
-            {Week:3,Run:6,Date:"01/06/2026",Days_Since_Surgery:119,Day:"Mon",Phase:"Base build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Easy conversational pace"},
-            {Week:3,Run:7,Date:"02/06/2026",Days_Since_Surgery:120,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"5:45-6:45/km reps",Terrain:"Hill route / track / measured path",Notes:"6 x 3min hills w/ 2min walk recovery"},
-            {Week:3,Run:8,Date:"04/06/2026",Days_Since_Surgery:122,Day:"Thu",Phase:"Base build",Type:"Steady",Distance_km:16,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic work"},
-            {Week:3,Run:9,Date:"06/06/2026",Days_Since_Surgery:124,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Long Run: Sustained effort"},
-            {Week:4,Run:10,Date:"08/06/2026",Days_Since_Surgery:126,Day:"Mon",Phase:"Base build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Easy conversational pace"},
-            {Week:4,Run:11,Date:"09/06/2026",Days_Since_Surgery:127,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"5:35-6:35/km reps",Terrain:"Hill route / track / measured path",Notes:"6 x 3min climbing reps w/ walk recovery"},
-            {Week:4,Run:12,Date:"11/06/2026",Days_Since_Surgery:129,Day:"Thu",Phase:"Base build",Type:"Steady",Distance_km:16,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic work"},
-            {Week:4,Run:13,Date:"13/06/2026",Days_Since_Surgery:131,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:33,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Long Run: Progressive effort"},
-            {Week:5,Run:14,Date:"15/06/2026",Days_Since_Surgery:133,Day:"Mon",Phase:"Base build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Easy conversational pace"},
-            {Week:5,Run:15,Date:"16/06/2026",Days_Since_Surgery:134,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"5:25-6:25/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"6 x 3min technical climbing"},
-            {Week:5,Run:16,Date:"18/06/2026",Days_Since_Surgery:136,Day:"Thu",Phase:"Base build",Type:"Steady",Distance_km:16,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic work"},
-            {Week:5,Run:17,Date:"20/06/2026",Days_Since_Surgery:138,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:36,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Long Run: Sustained effort"},
-            {Week:6,Run:18,Date:"22/06/2026",Days_Since_Surgery:140,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Easy conversational pace"},
-            {Week:6,Run:19,Date:"23/06/2026",Days_Since_Surgery:141,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:20-6:20/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"6 x 3min technical climbing"},
-            {Week:6,Run:20,Date:"25/06/2026",Days_Since_Surgery:143,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic work"},
-            {Week:6,Run:21,Date:"27/06/2026",Days_Since_Surgery:145,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Long Run: Sustained effort"},
-            {Week:7,Run:22,Date:"29/06/2026",Days_Since_Surgery:147,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Easy conversational pace"},
-            {Week:7,Run:23,Date:"30/06/2026",Days_Since_Surgery:148,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:10-6:10/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"6 x 3min technical climbing"},
-            {Week:7,Run:24,Date:"02/07/2026",Days_Since_Surgery:150,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic work"},
-            {Week:7,Run:25,Date:"04/07/2026",Days_Since_Surgery:152,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:38,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Long Run: Sustained effort"},
-            {Week:8,Run:26,Date:"06/07/2026",Days_Since_Surgery:154,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Easy conversational pace"},
-            {Week:8,Run:27,Date:"07/07/2026",Days_Since_Surgery:155,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:00-6:00/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"6 x 3min technical climbing"},
-            {Week:8,Run:28,Date:"09/07/2026",Days_Since_Surgery:157,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic work"},
-            {Week:8,Run:29,Date:"11/07/2026",Days_Since_Surgery:159,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:40,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Long Run: Sustained effort"},
-            {Week:9,Run:30,Date:"13/07/2026",Days_Since_Surgery:161,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Easy conversational pace"},
-            {Week:9,Run:31,Date:"14/07/2026",Days_Since_Surgery:162,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:00-5:50/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"6 x 3min technical climbing"},
-            {Week:9,Run:32,Date:"16/07/2026",Days_Since_Surgery:164,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focused aerobic work"},
-            {Week:9,Run:33,Date:"18/07/2026",Days_Since_Surgery:166,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:24,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Long Run: Moderate effort"},
-            {Week:10,Run:34,Date:"20/07/2026",Days_Since_Surgery:168,Day:"Mon",Phase:"Peak ultra",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Flat road or soft trail",Notes:"Recovery + mobility"},
-            {Week:10,Run:35,Date:"22/07/2026",Days_Since_Surgery:170,Day:"Wed",Phase:"Peak ultra",Type:"Hill quality",Distance_km:14,Pace:"5:00-6:00/km reps",Terrain:"Kefalos Old Town",Notes:"Early Morning (06:00 AM) - Climbing reps"},
-            {Week:10,Run:36,Date:"23/07/2026",Days_Since_Surgery:171,Day:"Thu",Phase:"Peak ultra",Type:"Steady",Distance_km:12,Pace:"By Effort / HR",Terrain:"Flat coastal roads",Notes:"Late Morning (11:00 AM)"},
-            {Week:10,Run:37,Date:"24/07/2026",Days_Since_Surgery:172,Day:"Fri",Phase:"Peak ultra",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail/Road mix",Notes:"Early Morning (06:00 AM)"},
-            {Week:10,Run:38,Date:"25/07/2026",Days_Since_Surgery:173,Day:"Sat",Phase:"Peak ultra",Type:"Long",Distance_km:22,Pace:"6:00-7:00/km",Terrain:"Trail/Road mix",Notes:"Early Morning (06:00 AM)"},
-            {Week:11,Run:39,Date:"27/07/2026",Days_Since_Surgery:175,Day:"Mon",Phase:"Peak ultra",Type:"Zone 2",Distance_km:12,Pace:"5:50-6:50/km",Terrain:"Flat road or soft trail",Notes:"Early Morning runs + heat acclimatisation"},
-            {Week:11,Run:40,Date:"28/07/2026",Days_Since_Surgery:176,Day:"Tue",Phase:"Peak ultra",Type:"Hill quality",Distance_km:16,Pace:"5:00-5:50/km reps",Terrain:"Hill route / track",Notes:"Early Morning (05:30 AM)"},
-            {Week:11,Run:41,Date:"29/07/2026",Days_Since_Surgery:177,Day:"Wed",Phase:"Peak ultra",Type:"Steady",Distance_km:12,Pace:"By Effort / HR",Terrain:"Flat coastal roads",Notes:"Late Morning (11:00 AM)"},
-            {Week:11,Run:42,Date:"31/07/2026",Days_Since_Surgery:179,Day:"Fri",Phase:"Peak ultra",Type:"Steady",Distance_km:16,Pace:"5:15-5:50/km",Terrain:"Rolling road or trail",Notes:"UK Morning: Based in UK - trail preference"},
-            {Week:11,Run:43,Date:"01/08/2026",Days_Since_Surgery:180,Day:"Sat",Phase:"Peak ultra",Type:"Long",Distance_km:26,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"Long Run: Sustained effort"},
-            {Week:12,Run:44,Date:"03/08/2026",Days_Since_Surgery:182,Day:"Mon",Phase:"Oxford Ultra race week",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Reduce volume to 50%"},
-            {Week:12,Run:45,Date:"04/08/2026",Days_Since_Surgery:183,Day:"Tue",Phase:"Oxford Ultra race week",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"Stride work - short reps"},
-            {Week:12,Run:46,Date:"07/08/2026",Days_Since_Surgery:186,Day:"Fri",Phase:"Oxford Ultra Race",Type:"Race",Distance_km:79,Pace:"Race Pace",Terrain:"Race course",Notes:"MTC Oxford Ultra (Target 12h30 min)"},
-            {Week:13,Run:47,Date:"10/08/2026",Days_Since_Surgery:189,Day:"Mon",Phase:"Recovery/reset",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Post-race recovery week"},
-            {Week:13,Run:48,Date:"11/08/2026",Days_Since_Surgery:190,Day:"Tue",Phase:"Recovery/reset",Type:"Hill quality",Distance_km:7,Pace:"Controlled uphill reps",Terrain:"Hill route / track / measured path",Notes:"Controlled pace - mobility + stairs"},
-            {Week:13,Run:49,Date:"13/08/2026",Days_Since_Surgery:192,Day:"Thu",Phase:"Recovery/reset",Type:"Steady",Distance_km:14,Pace:"6:15-7:15/km",Terrain:"Technical Trail (Light)",Notes:"Bridge Series prep"},
-            {Week:13,Run:50,Date:"15/08/2026",Days_Since_Surgery:194,Day:"Sat",Phase:"Recovery/reset",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Fuel practice for long runs"},
-            {Week:14,Run:51,Date:"17/08/2026",Days_Since_Surgery:196,Day:"Mon",Phase:"Recovery/reset",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Sustained easy pace"},
-            {Week:14,Run:52,Date:"18/08/2026",Days_Since_Surgery:197,Day:"Tue",Phase:"Recovery/reset",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / measured path",Notes:"Short hill reps - 4-5 x 3min"},
-            {Week:14,Run:53,Date:"20/08/2026",Days_Since_Surgery:199,Day:"Thu",Phase:"Recovery/reset",Type:"Steady",Distance_km:14,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Tempo / marathon effort"},
-            {Week:14,Run:54,Date:"22/08/2026",Days_Since_Surgery:201,Day:"Sat",Phase:"Recovery/reset",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Fuel practice for long runs"},
-            {Week:15,Run:55,Date:"24/08/2026",Days_Since_Surgery:203,Day:"Mon",Phase:"Trail speed build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Sustained easy pace"},
-            {Week:15,Run:56,Date:"25/08/2026",Days_Since_Surgery:204,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",Terrain:"Steep technical terrain",Notes:"Long climb reps - sustained hard effort"},
-            {Week:15,Run:57,Date:"27/08/2026",Days_Since_Surgery:206,Day:"Thu",Phase:"Trail speed build",Type:"Steady",Distance_km:18,Pace:"5:25-5:55/km",Terrain:"Rolling trail",Notes:"Hill-focused aerobic work"},
-            {Week:15,Run:58,Date:"29/08/2026",Days_Since_Surgery:208,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Long Run: Kranjska prep"},
-            {Week:16,Run:59,Date:"31/08/2026",Days_Since_Surgery:210,Day:"Mon",Phase:"Trail speed build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Sustained easy pace"},
-            {Week:16,Run:60,Date:"01/09/2026",Days_Since_Surgery:211,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",Terrain:"Steep technical terrain",Notes:"Long climb reps - sustained hard effort"},
-            {Week:16,Run:61,Date:"03/09/2026",Days_Since_Surgery:213,Day:"Thu",Phase:"Trail speed build",Type:"Steady",Distance_km:18,Pace:"5:25-5:55/km",Terrain:"Rolling trail",Notes:"Hill-focused aerobic work"},
-            {Week:16,Run:62,Date:"05/09/2026",Days_Since_Surgery:215,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Long Run: Kranjska prep"},
-            {Week:17,Run:63,Date:"07/09/2026",Days_Since_Surgery:217,Day:"Mon",Phase:"Trail speed build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Sustained easy pace"},
-            {Week:17,Run:64,Date:"08/09/2026",Days_Since_Surgery:218,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",Terrain:"Steep technical terrain",Notes:"Long climb reps - sustained hard effort"},
-            {Week:17,Run:65,Date:"10/09/2026",Days_Since_Surgery:220,Day:"Thu",Phase:"Trail speed build",Type:"Steady",Distance_km:18,Pace:"5:25-5:55/km",Terrain:"Rolling trail",Notes:"Hill-focused aerobic work"},
-            {Week:17,Run:66,Date:"12/09/2026",Days_Since_Surgery:222,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Long Run: Kranjska prep"},
-            {Week:18,Run:67,Date:"14/09/2026",Days_Since_Surgery:224,Day:"Mon",Phase:"Kranjska taper/race week",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Reduce volume to 50%"},
-            {Week:18,Run:68,Date:"15/09/2026",Days_Since_Surgery:225,Day:"Tue",Phase:"Kranjska taper/race week",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / measured path",Notes:"Stride work - short reps"},
-            {Week:18,Run:69,Date:"20/09/2026",Days_Since_Surgery:230,Day:"Sun",Phase:"Kranjska Race",Type:"Race",Distance_km:25,Pace:"Race Pace",Terrain:"Mountain trail course",Notes:"Kranjska Gora 25K"},
-            {Week:19,Run:70,Date:"21/09/2026",Days_Since_Surgery:231,Day:"Mon",Phase:"Bournemouth build/taper",Type:"Zone 2",Distance_km:10,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Post-race recovery week"},
-            {Week:19,Run:71,Date:"22/09/2026",Days_Since_Surgery:232,Day:"Tue",Phase:"Bournemouth build/taper",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / measured path",Notes:"Short hill reps - 4-5 x 3min"},
-            {Week:19,Run:72,Date:"24/09/2026",Days_Since_Surgery:234,Day:"Thu",Phase:"Bournemouth build/taper",Type:"Progression Steady",Distance_km:16,Pace:"Finish last 5km at 5:12/km",Terrain:"Rolling road or trail",Notes:"Marathon goal pace practice"},
-            {Week:19,Run:73,Date:"26/09/2026",Days_Since_Surgery:236,Day:"Sat",Phase:"Bournemouth build/taper",Type:"Long",Distance_km:32,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Fuel practice for long runs"},
-            {Week:20,Run:74,Date:"28/09/2026",Days_Since_Surgery:238,Day:"Mon",Phase:"Bournemouth build/taper",Type:"Zone 2",Distance_km:10,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Sustained easy pace"},
-            {Week:20,Run:75,Date:"29/09/2026",Days_Since_Surgery:239,Day:"Tue",Phase:"Bournemouth build/taper",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / measured path",Notes:"Stride work - short reps"},
-            {Week:20,Run:76,Date:"03/10/2026",Days_Since_Surgery:243,Day:"Sat",Phase:"Bournemouth Race",Type:"Race",Distance_km:50,Pace:"Aim 6h moving / 11h incl breaks",Terrain:"Coastal ultra course",Notes:"Bournemouth 50K"},
-            {Week:21,Run:77,Date:"05/10/2026",Days_Since_Surgery:245,Day:"Mon",Phase:"Half taper",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Post-race recovery"},
-            {Week:21,Run:78,Date:"06/10/2026",Days_Since_Surgery:246,Day:"Tue",Phase:"Half taper",Type:"Speed Quality",Distance_km:7,Pace:"4 x 2km @ 5:12/km w/ 2 min recovery",Terrain:"Flat Road / Track",Notes:"Half marathon pace practice"},
-            {Week:21,Run:79,Date:"11/10/2026",Days_Since_Surgery:251,Day:"Sun",Phase:"Half taper",Type:"Race",Distance_km:21.1,Pace:"5:12/km",Terrain:"Road half marathon course",Notes:"Oxford Half Marathon"}
+            {Week:1,Run:1,Date:"18/05/2026",Days_Since_Surgery:105,Day:"Mon",Phase:"Post-Brighton recovery",Type:"Easy",Distance_km:10,Pace:"6:15-6:50/km",Terrain:"Flat road or soft trail",Notes:[...]
+            {Week:1,Run:2,Date:"22/05/2026",Days_Since_Surgery:110,Day:"Fri",Phase:"Post-Brighton recovery",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",[...]
+            {Week:2,Run:3,Date:"25/05/2026",Days_Since_Surgery:112,Day:"Mon",Phase:"Post-Brighton recovery",Type:"Zone 2",Distance_km:10,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75[...]
+            {Week:2,Run:4,Date:"28/05/2026",Days_Since_Surgery:115,Day:"Thu",Phase:"Post-Brighton recovery",Type:"Steady",Distance_km:14,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:[...]
+            {Week:2,Run:5,Date:"30/05/2026",Days_Since_Surgery:117,Day:"Sat",Phase:"Post-Brighton recovery",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",[...]
+            {Week:3,Run:6,Date:"01/06/2026",Days_Since_Surgery:119,Day:"Mon",Phase:"Base build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR"[...]
+            {Week:3,Run:7,Date:"02/06/2026",Days_Since_Surgery:120,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"5:45-6:45/km reps",Terrain:"Hill route / track / measured p[...]
+            {Week:3,Run:8,Date:"04/06/2026",Days_Since_Surgery:122,Day:"Thu",Phase:"Base build",Type:"Steady",Distance_km:16,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focuse[...]
+            {Week:3,Run:9,Date:"06/06/2026",Days_Since_Surgery:124,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Long [...]
+            {Week:4,Run:10,Date:"08/06/2026",Days_Since_Surgery:126,Day:"Mon",Phase:"Base build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR[...]
+            {Week:4,Run:11,Date:"09/06/2026",Days_Since_Surgery:127,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"5:35-6:35/km reps",Terrain:"Hill route / track / measured [...]
+            {Week:4,Run:12,Date:"11/06/2026",Days_Since_Surgery:129,Day:"Thu",Phase:"Base build",Type:"Steady",Distance_km:16,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focus[...]
+            {Week:4,Run:13,Date:"13/06/2026",Days_Since_Surgery:131,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:33,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:"Long[...]
+            {Week:5,Run:14,Date:"15/06/2026",Days_Since_Surgery:133,Day:"Mon",Phase:"Base build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR[...]
+            {Week:5,Run:15,Date:"16/06/2026",Days_Since_Surgery:134,Day:"Tue",Phase:"Base build",Type:"Hill quality",Distance_km:7,Pace:"5:25-6:25/km reps",Terrain:"Technical trail / Hilly terrai[...]
+            {Week:5,Run:16,Date:"18/06/2026",Days_Since_Surgery:136,Day:"Thu",Phase:"Base build",Type:"Steady",Distance_km:16,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focus[...]
+            {Week:5,Run:17,Date:"20/06/2026",Days_Since_Surgery:138,Day:"Sat",Phase:"Base build",Type:"Long",Distance_km:36,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race ter[...]
+            {Week:6,Run:18,Date:"22/06/2026",Days_Since_Surgery:140,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max H[...]
+            {Week:6,Run:19,Date:"23/06/2026",Days_Since_Surgery:141,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:20-6:20/km reps",Terrain:"Technical trail / Hilly terra[...]
+            {Week:6,Run:20,Date:"25/06/2026",Days_Since_Surgery:143,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focu[...]
+            {Week:6,Run:21,Date:"27/06/2026",Days_Since_Surgery:145,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race te[...]
+            {Week:7,Run:22,Date:"29/06/2026",Days_Since_Surgery:147,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max H[...]
+            {Week:7,Run:23,Date:"30/06/2026",Days_Since_Surgery:148,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:10-6:10/km reps",Terrain:"Technical trail / Hilly terra[...]
+            {Week:7,Run:24,Date:"02/07/2026",Days_Since_Surgery:150,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focu[...]
+            {Week:7,Run:25,Date:"04/07/2026",Days_Since_Surgery:152,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:38,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race te[...]
+            {Week:8,Run:26,Date:"06/07/2026",Days_Since_Surgery:154,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max H[...]
+            {Week:8,Run:27,Date:"07/07/2026",Days_Since_Surgery:155,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:00-6:00/km reps",Terrain:"Technical trail / Hilly terra[...]
+            {Week:8,Run:28,Date:"09/07/2026",Days_Since_Surgery:157,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focu[...]
+            {Week:8,Run:29,Date:"11/07/2026",Days_Since_Surgery:159,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:40,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race te[...]
+            {Week:9,Run:30,Date:"13/07/2026",Days_Since_Surgery:161,Day:"Mon",Phase:"Ultra build",Type:"Zone 2",Distance_km:14,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max H[...]
+            {Week:9,Run:31,Date:"14/07/2026",Days_Since_Surgery:162,Day:"Tue",Phase:"Ultra build",Type:"Hill quality",Distance_km:7,Pace:"5:00-5:50/km reps",Terrain:"Technical trail / Hilly terra[...]
+            {Week:9,Run:32,Date:"16/07/2026",Days_Since_Surgery:164,Day:"Thu",Phase:"Ultra build",Type:"Steady",Distance_km:20,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Hill-focu[...]
+            {Week:9,Run:33,Date:"18/07/2026",Days_Since_Surgery:166,Day:"Sat",Phase:"Ultra build",Type:"Long",Distance_km:24,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race te[...]
+            {Week:10,Run:34,Date:"20/07/2026",Days_Since_Surgery:168,Day:"Mon",Phase:"Peak ultra",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Flat road or soft trail",Notes:"Recover[...]
+            {Week:10,Run:35,Date:"22/07/2026",Days_Since_Surgery:170,Day:"Wed",Phase:"Peak ultra",Type:"Hill quality",Distance_km:14,Pace:"5:00-6:00/km reps",Terrain:"Kefalos Old Town",Notes:"Ear[...]
+            {Week:10,Run:36,Date:"23/07/2026",Days_Since_Surgery:171,Day:"Thu",Phase:"Peak ultra",Type:"Steady",Distance_km:12,Pace:"By Effort / HR",Terrain:"Flat coastal roads",Notes:"Late Morni[...]
+            {Week:10,Run:37,Date:"24/07/2026",Days_Since_Surgery:172,Day:"Fri",Phase:"Peak ultra",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail/Road mix",Notes:"Early Morning (06:[...]
+            {Week:10,Run:38,Date:"25/07/2026",Days_Since_Surgery:173,Day:"Sat",Phase:"Peak ultra",Type:"Long",Distance_km:22,Pace:"6:00-7:00/km",Terrain:"Trail/Road mix",Notes:"Early Morning (06:[...]
+            {Week:11,Run:39,Date:"27/07/2026",Days_Since_Surgery:175,Day:"Mon",Phase:"Peak ultra",Type:"Zone 2",Distance_km:12,Pace:"5:50-6:50/km",Terrain:"Flat road or soft trail",Notes:"Early M[...]
+            {Week:11,Run:40,Date:"28/07/2026",Days_Since_Surgery:176,Day:"Tue",Phase:"Peak ultra",Type:"Hill quality",Distance_km:16,Pace:"5:00-5:50/km reps",Terrain:"Hill route / track",Notes:"E[...]
+            {Week:11,Run:41,Date:"29/07/2026",Days_Since_Surgery:177,Day:"Wed",Phase:"Peak ultra",Type:"Steady",Distance_km:12,Pace:"By Effort / HR",Terrain:"Flat coastal roads",Notes:"Late Morni[...]
+            {Week:11,Run:42,Date:"31/07/2026",Days_Since_Surgery:179,Day:"Fri",Phase:"Peak ultra",Type:"Steady",Distance_km:16,Pace:"5:15-5:50/km",Terrain:"Rolling road or trail",Notes:"UK Mornin[...]
+            {Week:11,Run:43,Date:"01/08/2026",Days_Since_Surgery:180,Day:"Sat",Phase:"Peak ultra",Type:"Long",Distance_km:26,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race te[...]
+            {Week:12,Run:44,Date:"03/08/2026",Days_Since_Surgery:182,Day:"Mon",Phase:"Oxford Ultra race week",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-7[...]
+            {Week:12,Run:45,Date:"04/08/2026",Days_Since_Surgery:183,Day:"Tue",Phase:"Oxford Ultra race week",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Technical trail /[...]
+            {Week:12,Run:46,Date:"07/08/2026",Days_Since_Surgery:186,Day:"Fri",Phase:"Oxford Ultra Race",Type:"Race",Distance_km:79,Pace:"Race Pace",Terrain:"Race course",Notes:"MTC Oxford Ultra [...]
+            {Week:13,Run:47,Date:"10/08/2026",Days_Since_Surgery:189,Day:"Mon",Phase:"Recovery/reset",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Ma[...]
+            {Week:13,Run:48,Date:"11/08/2026",Days_Since_Surgery:190,Day:"Tue",Phase:"Recovery/reset",Type:"Hill quality",Distance_km:7,Pace:"Controlled uphill reps",Terrain:"Hill route / track /[...]
+            {Week:13,Run:49,Date:"13/08/2026",Days_Since_Surgery:192,Day:"Thu",Phase:"Recovery/reset",Type:"Steady",Distance_km:14,Pace:"6:15-7:15/km",Terrain:"Technical Trail (Light)",Notes:"Bri[...]
+            {Week:13,Run:50,Date:"15/08/2026",Days_Since_Surgery:194,Day:"Sat",Phase:"Recovery/reset",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:[...]
+            {Week:14,Run:51,Date:"17/08/2026",Days_Since_Surgery:196,Day:"Mon",Phase:"Recovery/reset",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Ma[...]
+            {Week:14,Run:52,Date:"18/08/2026",Days_Since_Surgery:197,Day:"Tue",Phase:"Recovery/reset",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / meas[...]
+            {Week:14,Run:53,Date:"20/08/2026",Days_Since_Surgery:199,Day:"Thu",Phase:"Recovery/reset",Type:"Steady",Distance_km:14,Pace:"5:20-5:55/km",Terrain:"Rolling road or trail",Notes:"Tempo[...]
+            {Week:14,Run:54,Date:"22/08/2026",Days_Since_Surgery:201,Day:"Sat",Phase:"Recovery/reset",Type:"Long",Distance_km:22,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrain",Notes:[...]
+            {Week:15,Run:55,Date:"24/08/2026",Days_Since_Surgery:203,Day:"Mon",Phase:"Trail speed build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% o[...]
+            {Week:15,Run:56,Date:"25/08/2026",Days_Since_Surgery:204,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",T[...]
+            {Week:15,Run:57,Date:"27/08/2026",Days_Since_Surgery:206,Day:"Thu",Phase:"Trail speed build",Type:"Steady",Distance_km:18,Pace:"5:25-5:55/km",Terrain:"Rolling trail",Notes:"Hill-focus[...]
+            {Week:15,Run:58,Date:"29/08/2026",Days_Since_Surgery:208,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum E[...]
+            {Week:16,Run:59,Date:"31/08/2026",Days_Since_Surgery:210,Day:"Mon",Phase:"Trail speed build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% o[...]
+            {Week:16,Run:60,Date:"01/09/2026",Days_Since_Surgery:211,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",T[...]
+            {Week:16,Run:61,Date:"03/09/2026",Days_Since_Surgery:213,Day:"Thu",Phase:"Trail speed build",Type:"Steady",Distance_km:18,Pace:"5:25-5:55/km",Terrain:"Rolling trail",Notes:"Hill-focus[...]
+            {Week:16,Run:62,Date:"05/09/2026",Days_Since_Surgery:215,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum E[...]
+            {Week:17,Run:63,Date:"07/09/2026",Days_Since_Surgery:217,Day:"Mon",Phase:"Trail speed build",Type:"Zone 2",Distance_km:12,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% o[...]
+            {Week:17,Run:64,Date:"08/09/2026",Days_Since_Surgery:218,Day:"Tue",Phase:"Trail speed build",Type:"Mountain Quality",Distance_km:7,Pace:"6 x 3min hard climbing / walk-down recovery",T[...]
+            {Week:17,Run:65,Date:"10/09/2026",Days_Since_Surgery:220,Day:"Thu",Phase:"Trail speed build",Type:"Steady",Distance_km:18,Pace:"5:25-5:55/km",Terrain:"Rolling trail",Notes:"Hill-focus[...]
+            {Week:17,Run:66,Date:"12/09/2026",Days_Since_Surgery:222,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum E[...]
+            {Week:18,Run:67,Date:"14/09/2026",Days_Since_Surgery:224,Day:"Mon",Phase:"Kranjska taper/race week",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60[...]
+            {Week:18,Run:68,Date:"15/09/2026",Days_Since_Surgery:225,Day:"Tue",Phase:"Kranjska taper/race week",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / tr[...]
+            {Week:18,Run:69,Date:"20/09/2026",Days_Since_Surgery:230,Day:"Sun",Phase:"Kranjska Race",Type:"Race",Distance_km:25,Pace:"Race Pace",Terrain:"Mountain trail course",Notes:"Kranjska Go[...]
+            {Week:19,Run:70,Date:"21/09/2026",Days_Since_Surgery:231,Day:"Mon",Phase:"Bournemouth build/taper",Type:"Zone 2",Distance_km:10,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60[...]
+            {Week:19,Run:71,Date:"22/09/2026",Days_Since_Surgery:232,Day:"Tue",Phase:"Bournemouth build/taper",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / tra[...]
+            {Week:19,Run:72,Date:"24/09/2026",Days_Since_Surgery:234,Day:"Thu",Phase:"Bournemouth build/taper",Type:"Progression Steady",Distance_km:16,Pace:"Finish last 5km at 5:12/km",Terrain:"[...]
+            {Week:19,Run:73,Date:"26/09/2026",Days_Since_Surgery:236,Day:"Sat",Phase:"Bournemouth build/taper",Type:"Long",Distance_km:32,Pace:"6:15-7:15/km",Terrain:"Trail, hills, or race terrai[...]
+            {Week:20,Run:74,Date:"28/09/2026",Days_Since_Surgery:238,Day:"Mon",Phase:"Bournemouth build/taper",Type:"Zone 2",Distance_km:10,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60[...]
+            {Week:20,Run:75,Date:"29/09/2026",Days_Since_Surgery:239,Day:"Tue",Phase:"Bournemouth build/taper",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / tra[...]
+            {Week:20,Run:76,Date:"03/10/2026",Days_Since_Surgery:243,Day:"Sat",Phase:"Bournemouth Race",Type:"Race",Distance_km:50,Pace:"Aim 6h moving / 11h incl breaks",Terrain:"Coastal ultra co[...]
+            {Week:21,Run:77,Date:"05/10/2026",Days_Since_Surgery:245,Day:"Mon",Phase:"Half taper",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR[...]
+            {Week:21,Run:78,Date:"06/10/2026",Days_Since_Surgery:246,Day:"Tue",Phase:"Half taper",Type:"Speed Quality",Distance_km:7,Pace:"4 x 2km @ 5:12/km w/ 2 min recovery",Terrain:"Flat Road [...]
+            {Week:21,Run:79,Date:"11/10/2026",Days_Since_Surgery:251,Day:"Sun",Phase:"Half taper",Type:"Race",Distance_km:21.1,Pace:"5:12/km",Terrain:"Road half marathon course",Notes:"Oxford Hal[...]
         ];
 
         let trainingData = freshRunsData.map(run => ({...run, completed: false}));
@@ -631,7 +665,7 @@
                     const estTime = estimateRunTime(r.Distance_km, r.Pace);
                     const isR = r.Type === 'Race';
                     const isC = r.completed;
-                    return `<div class="run-item ${isR ? 'race' : ''} ${isC ? 'completed' : ''}" draggable="true" data-index="${r.idx}" ondragstart="dragStart(event)" ondrop="drop(event)" ondragover="dragOver(event)" ondragend="dragEnd(event)">
+                    return `<div class="run-item ${isR ? 'race' : ''} ${isC ? 'completed' : ''}" draggable="true" data-index="${r.idx}" ondragstart="dragStart(event)" ondrop="drop(event)" ondrago[...]
                         <div class="mobile-header">
                             <div style="display:flex; gap:8px; align-items:center;">
                                 <span class="day-badge">${r.Day}</span>
@@ -648,7 +682,7 @@
                         <div class="mobile-full"><div class="notes">${r.Notes || '-'}</div></div>
                         <div class="actions" style="justify-content:space-between;">
                             <button class="secondary" style="flex:1;" onclick="editRun(${r.idx})">✏️ Edit</button>
-                            ${isC ? `<button class="secondary" style="flex:1; background:#6c757d;" onclick="markIncomplete(${r.idx})">↩️ Undo</button>` : `<button class="secondary" style="flex:1;" onclick="markComplete(${r.idx})">✅ Done</button>`}
+                            ${isC ? `<button class="secondary" style="flex:1; background:#6c757d;" onclick="markIncomplete(${r.idx})">↩️ Undo</button>` : `<button class="secondary" style="fle[...]
                         </div>
                     </div>`;
                 }).join('')}</div>`;
