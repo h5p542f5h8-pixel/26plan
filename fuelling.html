@@ -53,7 +53,7 @@
       color: #495057;
       font-size: 0.9em;
     }
-    select, input[type="text"], input[type="date"], input[type="number"], button {
+    select, input[type="text"], input[type="number"], button {
       padding: 8px 12px;
       border: 1px solid #ced4da;
       border-radius: 5px;
@@ -193,6 +193,15 @@
       color: #495057;
       font-size: 0.9em;
     }
+    .carb-total span {
+      font-weight: 600;
+    }
+    .carb-total.under {
+      color: #fd7e14;
+    }
+    .carb-total.good {
+      color: #198754;
+    }
     .food-pills {
       display: flex;
       flex-wrap: wrap;
@@ -259,7 +268,6 @@
       color: #495057;
     }
     .form-group input,
-    .form-group select,
     .form-group textarea {
       width: 100%;
       padding: 10px;
@@ -346,7 +354,7 @@
   <div class="container">
     <div class="header">
       <h1>🍜 2026 Fuelling Plan</h1>
-      <p style="font-size:0.9em; margin-top:10px;">Match fuelling to each run · edit any time · carbs tracked per session</p>
+      <p style="font-size:0.9em; margin-top:10px;">120 g/hour fuelling targets per run</p>
     </div>
 
     <div class="controls">
@@ -378,8 +386,8 @@
       <div class="stats" id="statsContainer"></div>
       <div id="runsContainer"></div>
       <div class="export-section">
-        <h3>✅ Fuelling planner ready</h3>
-        <p>Day · Date · Distance · Run number · food selections · editable carb totals</p>
+        <h3>✅ 120 g/hour targets applied</h3>
+        <p>Enter planned minutes per run to see target vs planned carbs</p>
       </div>
     </div>
   </div>
@@ -405,6 +413,10 @@
           <input type="text" id="editRunNumber" readonly>
         </div>
         <div class="form-group">
+          <label for="editPlannedMinutes">Planned time (minutes)</label>
+          <input type="number" id="editPlannedMinutes" min="0" step="1" placeholder="e.g. 180 for 3 hours">
+        </div>
+        <div class="form-group">
           <label>Food selections</label>
           <div id="foodOptions" class="food-grid"></div>
         </div>
@@ -416,6 +428,10 @@
           <label for="editTotalCarbs">Total planned carbs (g)</label>
           <input type="text" id="editTotalCarbs" readonly>
         </div>
+        <div class="form-group">
+          <label for="editTargetCarbs">Target at 120 g/h (g)</label>
+          <input type="text" id="editTargetCarbs" readonly>
+        </div>
         <div class="modal-actions">
           <button type="submit">Save</button>
           <button type="button" class="warning" onclick="clearFoods()">Clear food</button>
@@ -426,417 +442,4 @@
   </div>
 
   <script>
-    const baseRunsData = [
-      {Run:1,Day:'Mon',Date:'18/05/2026',Distance_km:10,Type:'Easy'},
-      {Run:2,Day:'Fri',Date:'22/05/2026',Distance_km:22,Type:'Long'},
-      {Run:3,Day:'Mon',Date:'25/05/2026',Distance_km:10,Type:'Zone 2'},
-      {Run:4,Day:'Thu',Date:'28/05/2026',Distance_km:14,Type:'Steady'},
-      {Run:5,Day:'Sat',Date:'30/05/2026',Distance_km:22,Type:'Long'},
-      {Run:6,Day:'Mon',Date:'01/06/2026',Distance_km:12,Type:'Zone 2'},
-      {Run:7,Day:'Tue',Date:'02/06/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:8,Day:'Thu',Date:'04/06/2026',Distance_km:16,Type:'Steady'},
-      {Run:9,Day:'Sat',Date:'06/06/2026',Distance_km:30,Type:'Long'},
-      {Run:10,Day:'Mon',Date:'08/06/2026',Distance_km:12,Type:'Zone 2'},
-      {Run:11,Day:'Tue',Date:'09/06/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:12,Day:'Thu',Date:'11/06/2026',Distance_km:16,Type:'Steady'},
-      {Run:13,Day:'Sat',Date:'13/06/2026',Distance_km:33,Type:'Long'},
-      {Run:14,Day:'Mon',Date:'15/06/2026',Distance_km:12,Type:'Zone 2'},
-      {Run:15,Day:'Tue',Date:'16/06/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:16,Day:'Thu',Date:'18/06/2026',Distance_km:16,Type:'Steady'},
-      {Run:17,Day:'Sat',Date:'20/06/2026',Distance_km:36,Type:'Long'},
-      {Run:18,Day:'Mon',Date:'22/06/2026',Distance_km:14,Type:'Zone 2'},
-      {Run:19,Day:'Tue',Date:'23/06/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:20,Day:'Thu',Date:'25/06/2026',Distance_km:20,Type:'Steady'},
-      {Run:21,Day:'Sat',Date:'27/06/2026',Distance_km:22,Type:'Long'},
-      {Run:22,Day:'Mon',Date:'29/06/2026',Distance_km:14,Type:'Zone 2'},
-      {Run:23,Day:'Tue',Date:'30/06/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:24,Day:'Thu',Date:'02/07/2026',Distance_km:20,Type:'Steady'},
-      {Run:25,Day:'Sat',Date:'04/07/2026',Distance_km:38,Type:'Long'},
-      {Run:26,Day:'Mon',Date:'06/07/2026',Distance_km:14,Type:'Zone 2'},
-      {Run:27,Day:'Tue',Date:'07/07/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:28,Day:'Thu',Date:'09/07/2026',Distance_km:20,Type:'Steady'},
-      {Run:29,Day:'Sat',Date:'11/07/2026',Distance_km:40,Type:'Long'},
-      {Run:30,Day:'Mon',Date:'13/07/2026',Distance_km:14,Type:'Zone 2'},
-      {Run:31,Day:'Tue',Date:'14/07/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:32,Day:'Thu',Date:'16/07/2026',Distance_km:20,Type:'Steady'},
-      {Run:33,Day:'Sat',Date:'18/07/2026',Distance_km:24,Type:'Long'},
-      {Run:34,Day:'Mon',Date:'20/07/2026',Distance_km:12,Type:'Zone 2'},
-      {Run:35,Day:'Wed',Date:'22/07/2026',Distance_km:14,Type:'Hill quality'},
-      {Run:36,Day:'Thu',Date:'23/07/2026',Distance_km:12,Type:'Steady'},
-      {Run:37,Day:'Fri',Date:'24/07/2026',Distance_km:22,Type:'Long'},
-      {Run:38,Day:'Sat',Date:'25/07/2026',Distance_km:22,Type:'Long'},
-      {Run:39,Day:'Mon',Date:'27/07/2026',Distance_km:12,Type:'Zone 2'},
-      {Run:40,Day:'Tue',Date:'28/07/2026',Distance_km:16,Type:'Hill quality'},
-      {Run:41,Day:'Wed',Date:'29/07/2026',Distance_km:12,Type:'Steady'},
-      {Run:42,Day:'Fri',Date:'31/07/2026',Distance_km:16,Type:'Steady'},
-      {Run:43,Day:'Sat',Date:'01/08/2026',Distance_km:26,Type:'Long'},
-      {Run:44,Day:'Mon',Date:'03/08/2026',Distance_km:8,Type:'Zone 2'},
-      {Run:45,Day:'Tue',Date:'04/08/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:46,Day:'Fri',Date:'07/08/2026',Distance_km:79,Type:'Race'},
-      {Run:47,Day:'Mon',Date:'10/08/2026',Distance_km:8,Type:'Zone 2'},
-      {Run:48,Day:'Tue',Date:'11/08/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:49,Day:'Thu',Date:'13/08/2026',Distance_km:14,Type:'Steady'},
-      {Run:50,Day:'Sat',Date:'15/08/2026',Distance_km:22,Type:'Long'},
-      {Run:51,Day:'Mon',Date:'17/08/2026',Distance_km:8,Type:'Zone 2'},
-      {Run:52,Day:'Tue',Date:'18/08/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:53,Day:'Thu',Date:'20/08/2026',Distance_km:14,Type:'Steady'},
-      {Run:54,Day:'Sat',Date:'22/08/2026',Distance_km:22,Type:'Long'},
-      {Run:55,Day:'Mon',Date:'24/08/2026',Distance_km:12,Type:'Zone 2'},
-      {Run:56,Day:'Tue',Date:'25/08/2026',Distance_km:7,Type:'Mountain Quality'},
-      {Run:57,Day:'Thu',Date:'27/08/2026',Distance_km:18,Type:'Steady'},
-      {Run:58,Day:'Sat',Date:'29/08/2026',Distance_km:30,Type:'Long'},
-      {Run:59,Day:'Mon',Date:'31/08/2026',Distance_km:12,Type:'Zone 2'},
-      {Run:60,Day:'Tue',Date:'01/09/2026',Distance_km:7,Type:'Mountain Quality'},
-      {Run:61,Day:'Thu',Date:'03/09/2026',Distance_km:18,Type:'Steady'},
-      {Run:62,Day:'Sat',Date:'05/09/2026',Distance_km:30,Type:'Long'},
-      {Run:63,Day:'Mon',Date:'07/09/2026',Distance_km:12,Type:'Zone 2'},
-      {Run:64,Day:'Tue',Date:'08/09/2026',Distance_km:7,Type:'Mountain Quality'},
-      {Run:65,Day:'Thu',Date:'10/09/2026',Distance_km:18,Type:'Steady'},
-      {Run:66,Day:'Sat',Date:'12/09/2026',Distance_km:30,Type:'Long'},
-      {Run:67,Day:'Mon',Date:'14/09/2026',Distance_km:8,Type:'Zone 2'},
-      {Run:68,Day:'Tue',Date:'15/09/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:69,Day:'Sun',Date:'20/09/2026',Distance_km:25,Type:'Race'},
-      {Run:70,Day:'Mon',Date:'21/09/2026',Distance_km:10,Type:'Zone 2'},
-      {Run:71,Day:'Tue',Date:'22/09/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:72,Day:'Thu',Date:'24/09/2026',Distance_km:16,Type:'Progression Steady'},
-      {Run:73,Day:'Sat',Date:'26/09/2026',Distance_km:32,Type:'Long'},
-      {Run:74,Day:'Mon',Date:'28/09/2026',Distance_km:10,Type:'Zone 2'},
-      {Run:75,Day:'Tue',Date:'29/09/2026',Distance_km:7,Type:'Hill quality'},
-      {Run:76,Day:'Sat',Date:'03/10/2026',Distance_km:50,Type:'Race'},
-      {Run:77,Day:'Mon',Date:'05/10/2026',Distance_km:8,Type:'Zone 2'},
-      {Run:78,Day:'Tue',Date:'06/10/2026',Distance_km:7,Type:'Speed Quality'},
-      {Run:79,Day:'Sun',Date:'11/10/2026',Distance_km:21.1,Type:'Race'}
-    ];
-
-    const foodCatalogue = [
-      { id: 'naak-salted-soup', name: 'Näak Salted Soup', carbs: 55 },
-      { id: 'naak-energy-drink', name: 'Näak Energy Drink (500ml)', carbs: 55 },
-      { id: 'aldi-bagel-pastrami', name: 'Aldi Bagel with Pastrami & Pickle', carbs: 44 },
-      { id: 'aldi-bagel-bovril', name: 'Aldi Bagel with Bovril & Dairylea', carbs: 44 },
-      { id: 'running-gel', name: 'Running Gel (1:0.8 mix)', carbs: 40 },
-      { id: 'running-flapjack', name: 'Running Flapjack', carbs: 40 },
-      { id: 'sweets', name: 'Sweets (per portion)', carbs: 40 },
-      { id: 'precision-fuel-chews', name: 'Precision Fuel Chews', carbs: 30 },
-      { id: 'kmc-mint-gel', name: 'KMC Mint Gel', carbs: 27 },
-      { id: 'Running-puree', name: 'Running Puree', carbs: 26 },
-      { id: 'naak-waffles', name: 'Näak Waffles', carbs: 17 },
-      { id: 'single-bounty-bar', name: 'Single Bounty Bar (1 piece)', carbs: 17 }
-      { id: 'Running Tiffin', name: 'Running Tiffin', carbs:40},
-    ];
-
-    const storageKey = 'fuellingPlan2026_v1';
-    let currentEditIndex = null;
-
-    const savedFuelling = (() => {
-      try {
-        return JSON.parse(localStorage.getItem(storageKey) || '{}');
-      } catch (e) {
-        return {};
-      }
-    })();
-
-    let fuellingData = baseRunsData.map(run => {
-      const saved = savedFuelling[run.Run] || {};
-      return {
-        ...run,
-        foods: Array.isArray(saved.foods) ? saved.foods : [],
-        notes: saved.notes || '',
-        completed: !!saved.completed
-      };
-    });
-
-    function getFoodById(id) {
-      return foodCatalogue.find(food => food.id === id);
-    }
-
-    function calculateTotalCarbs(run) {
-      return run.foods.reduce((sum, item) => {
-        const food = getFoodById(item.id);
-        return sum + (food ? food.carbs * (item.qty || 0) : 0);
-      }, 0);
-    }
-
-    function saveFuellingData() {
-      const payload = {};
-      fuellingData.forEach(run => {
-        payload[run.Run] = {
-          foods: run.foods,
-          notes: run.notes,
-          completed: !!run.completed
-        };
-      });
-      localStorage.setItem(storageKey, JSON.stringify(payload));
-    }
-
-    function populateFilters() {
-      const dayFilter = document.getElementById('dayFilter');
-      const foodFilter = document.getElementById('foodFilter');
-      const days = [...new Set(fuellingData.map(run => run.Day))];
-      days.forEach(day => {
-        const option = document.createElement('option');
-        option.value = day;
-        option.textContent = day;
-        dayFilter.appendChild(option);
-      });
-      foodCatalogue.forEach(food => {
-        const option = document.createElement('option');
-        option.value = food.id;
-        option.textContent = food.name;
-        foodFilter.appendChild(option);
-      });
-    }
-
-    function updateStats() {
-      const totalRuns = fuellingData.length;
-      const visibleRuns = fuellingData.filter(run => !run.completed).length;
-      const plannedRuns = fuellingData.filter(run => (run.foods.length > 0 || run.notes.trim()) && !run.completed).length;
-      const totalCarbs = fuellingData.reduce((sum, run) => sum + calculateTotalCarbs(run), 0);
-      const averageCarbs = plannedRuns ? (totalCarbs / plannedRuns).toFixed(0) : 0;
-      const highFuelRuns = fuellingData.filter(run => calculateTotalCarbs(run) >= 80 && !run.completed).length;
-      const completedRuns = fuellingData.filter(run => run.completed).length;
-
-      document.getElementById('statsContainer').innerHTML = `
-        <div class="stat-card"><h3>${totalRuns}</h3><p>Total runs</p></div>
-        <div class="stat-card completed"><h3>${plannedRuns}</h3><p>Planned & visible runs</p></div>
-        <div class="stat-card"><h3>${visibleRuns}</h3><p>Visible runs (not completed)</p></div>
-        <div class="stat-card warning"><h3>${averageCarbs}g</h3><p>Avg per planned visible run</p></div>
-        <div class="stat-card"><h3>${highFuelRuns}</h3><p>80g+ visible runs</p></div>
-        <div class="stat-card completed"><h3>${completedRuns}</h3><p>Completed runs</p></div>
-      `;
-    }
-
-    function renderRuns() {
-      const dayFilter = document.getElementById('dayFilter').value;
-      const foodFilter = document.getElementById('foodFilter').value;
-      const search = document.getElementById('searchBox').value.toLowerCase();
-      const showCompleted = document.getElementById('showCompleted').checked;
-
-      let filtered = fuellingData.filter(run => {
-        if (!showCompleted && run.completed) return false;
-        if (dayFilter !== 'all' && run.Day !== dayFilter) return false;
-        if (foodFilter !== 'all' && !run.foods.some(item => item.id === foodFilter && item.qty > 0)) return false;
-        if (search) {
-          const foodNames = run.foods.map(item => getFoodById(item.id)?.name || '').join(' ');
-          const haystack = `${run.Run} ${run.Day} ${run.Date} ${run.Distance_km} ${run.Type} ${run.notes} ${foodNames}`.toLowerCase();
-          if (!haystack.includes(search)) return false;
-        }
-        return true;
-      });
-
-      const container = document.getElementById('runsContainer');
-      container.innerHTML = '';
-
-      filtered.forEach(run => {
-        const miles = (run.Distance_km * 0.621371).toFixed(1);
-        const totalCarbs = calculateTotalCarbs(run);
-        const selectedFoods = run.foods
-          .filter(item => item.qty > 0)
-          .map(item => {
-            const food = getFoodById(item.id);
-            return food ? `<span class="food-pill">${food.name}<span class="qty">×${item.qty}</span></span>` : '';
-          })
-          .join('');
-
-        const wrapper = document.createElement('div');
-        wrapper.className = 'run-container';
-        wrapper.innerHTML = `
-          <div class="run-header ${run.completed ? 'completed' : ''}">
-            <span>${run.completed ? '✅ ' : ''}Run ${run.Run} • ${run.Type}</span>
-            <span>${totalCarbs}g planned carbs</span>
-          </div>
-          <div class="run-item">
-            <div class="mobile-header">
-              <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-                <span class="day-badge ${run.completed ? 'completed' : ''}">${run.Day}</span>
-                <span class="run-number">Run number: ${run.Run}</span>
-              </div>
-              <span class="date-display">${run.Date}</span>
-            </div>
-            <div class="mobile-main">
-              <div><div class="distance">${run.Distance_km}km (${miles}mi)</div></div>
-              <div><div class="carb-total">Planned carbs: ${totalCarbs}g</div></div>
-            </div>
-            <div class="mobile-full">
-              <div class="food-summary">${selectedFoods || '<span style="color:#6c757d;">No food selected yet</span>'}</div>
-            </div>
-            <div class="mobile-full">
-              <div class="notes-text">${run.notes ? run.notes : '<span style="color:#6c757d;">No fuelling notes added</span>'}</div>
-            </div>
-            <div class="actions">
-              <button class="secondary" onclick="editRun(${run.Run})">✏️ Edit fuelling</button>
-              <button class="outline" onclick="toggleCompleted(${run.Run})">
-                ${run.completed ? '↩️ Undo complete' : '✅ Mark complete & hide'}
-              </button>
-            </div>
-          </div>
-        `;
-        container.appendChild(wrapper);
-      });
-
-      if (!filtered.length) {
-        container.innerHTML = '<div class="run-container"><div class="run-item"><div class="notes-text">No runs match the current filter.</div></div></div>';
-      }
-
-      updateStats();
-    }
-
-    function buildFoodOptions(run) {
-      const foodOptions = document.getElementById('foodOptions');
-      foodOptions.innerHTML = foodCatalogue.map(food => {
-        const selected = run.foods.find(item => item.id === food.id);
-        const qty = selected?.qty || 0;
-        return `
-          <div class="food-option">
-            <input type="checkbox" id="food-${food.id}" data-food-id="${food.id}" ${qty > 0 ? 'checked' : ''} onchange="toggleFoodQty('${food.id}')">
-            <label for="food-${food.id}">
-              <div class="food-name">${food.name}</div>
-              <div class="food-carbs">${food.carbs}g carbs each</div>
-            </label>
-            <input type="number" min="1" step="1" value="${qty > 0 ? qty : 1}" id="qty-${food.id}" ${qty > 0 ? '' : 'disabled'} oninput="updateModalCarbs()">
-          </div>
-        `;
-      }).join('');
-      updateModalCarbs();
-    }
-
-    function toggleFoodQty(foodId) {
-      const checkbox = document.getElementById(`food-${foodId}`);
-      const qtyInput = document.getElementById(`qty-${foodId}`);
-      qtyInput.disabled = !checkbox.checked;
-      if (checkbox.checked && (!qtyInput.value || Number(qtyInput.value) < 1)) qtyInput.value = 1;
-      updateModalCarbs();
-    }
-
-    function updateModalCarbs() {
-      let total = 0;
-      foodCatalogue.forEach(food => {
-        const checkbox = document.getElementById(`food-${food.id}`);
-        const qtyInput = document.getElementById(`qty-${food.id}`);
-        if (checkbox && qtyInput && checkbox.checked) {
-          total += food.carbs * Math.max(1, Number(qtyInput.value || 1));
-        }
-      });
-      document.getElementById('editTotalCarbs').value = `${total}g`;
-    }
-
-    function editRun(runNumber) {
-      const run = fuellingData.find(item => item.Run === runNumber);
-      currentEditIndex = fuellingData.findIndex(item => item.Run === runNumber);
-      document.getElementById('editDay').value = run.Day;
-      document.getElementById('editDate').value = run.Date;
-      document.getElementById('editDistance').value = `${run.Distance_km}km`;
-      document.getElementById('editRunNumber').value = run.Run;
-      document.getElementById('editNotes').value = run.notes || '';
-      buildFoodOptions(run);
-      document.getElementById('editModal').classList.add('active');
-    }
-
-    function clearFoods() {
-      foodCatalogue.forEach(food => {
-        const checkbox = document.getElementById(`food-${food.id}`);
-        const qtyInput = document.getElementById(`qty-${food.id}`);
-        if (checkbox) checkbox.checked = false;
-        if (qtyInput) {
-          qtyInput.disabled = true;
-          qtyInput.value = 1;
-        }
-      });
-      updateModalCarbs();
-    }
-
-    function closeModal() {
-      document.getElementById('editModal').classList.remove('active');
-      currentEditIndex = null;
-    }
-
-    function toggleCompleted(runNumber) {
-      const idx = fuellingData.findIndex(r => r.Run === runNumber);
-      if (idx === -1) return;
-      fuellingData[idx].completed = !fuellingData[idx].completed;
-      saveFuellingData();
-      renderRuns();
-    }
-
-    document.getElementById('editForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      if (currentEditIndex === null) return;
-
-      const selectedFoods = foodCatalogue
-        .map(food => {
-          const checkbox = document.getElementById(`food-${food.id}`);
-          const qtyInput = document.getElementById(`qty-${food.id}`);
-          return checkbox && checkbox.checked ? { id: food.id, qty: Math.max(1, Number(qtyInput.value || 1)) } : null;
-        })
-        .filter(Boolean);
-
-      fuellingData[currentEditIndex].foods = selectedFoods;
-      fuellingData[currentEditIndex].notes = document.getElementById('editNotes').value.trim();
-      saveFuellingData();
-      renderRuns();
-      closeModal();
-    });
-
-    function resetFilters() {
-      document.getElementById('dayFilter').value = 'all';
-      document.getElementById('foodFilter').value = 'all';
-      document.getElementById('searchBox').value = '';
-      document.getElementById('showCompleted').checked = true;
-      renderRuns();
-    }
-
-    function exportToCSV() {
-      const rows = fuellingData.map(run => {
-        const foods = run.foods
-          .filter(item => item.qty > 0)
-          .map(item => {
-            const food = getFoodById(item.id);
-            return food ? `${food.name} x${item.qty}` : '';
-          })
-          .filter(Boolean)
-          .join(' | ');
-        return {
-          Day: run.Day,
-          Date: run.Date,
-          Distance_km: run.Distance_km,
-          Run_number: run.Run,
-          Run_type: run.Type,
-          Foods: foods,
-          Total_carbs_g: calculateTotalCarbs(run),
-          Notes: run.notes,
-          Completed: run.completed ? 'Yes' : 'No'
-        };
-      });
-
-      const headers = Object.keys(rows[0]);
-      const csv = [
-        headers.join(','),
-        ...rows.map(row => headers.map(header => {
-          const value = String(row[header] ?? '');
-          return /[",\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
-        }).join(','))
-      ].join('\n');
-
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'fuelling_plan_2026.csv';
-      link.click();
-      URL.revokeObjectURL(url);
-    }
-
-    document.getElementById('dayFilter').addEventListener('change', renderRuns);
-    document.getElementById('foodFilter').addEventListener('change', renderRuns);
-    document.getElementById('searchBox').addEventListener('input', renderRuns);
-    document.getElementById('showCompleted').addEventListener('change', renderRuns);
-    document.getElementById('editModal').addEventListener('click', function(e) {
-      if (e.target === this) closeModal();
-    });
-
-    window.onload = function() {
-      populateFilters();
-      renderRuns();
-    };
-  </script>
-</body>
-</html>
+    const baseRuns
