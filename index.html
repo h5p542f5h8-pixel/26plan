@@ -227,11 +227,6 @@
             white-space: nowrap;
         }
 
-        .run-type {
-            font-weight: 600;
-            color: #495057;
-        }
-
         .distance {
             color: #667eea;
             font-weight: 600;
@@ -336,15 +331,6 @@
 
         .modal-actions button {
             flex: 1;
-        }
-
-        .completion-badge {
-            background: #28a745;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 15px;
-            font-size: 0.75em;
-            font-weight: bold;
         }
 
         .export-section {
@@ -495,7 +481,7 @@
             {Week:11,Run:43,Date:"01/08/2026",Days_Since_Surgery:180,Day:"Sat",Phase:"Peak ultra",Type:"Long",Distance_km:26,Pace:"6:15-7:15/km",Terrain:"Technical trail / Hilly terrain / Race terrain",Notes:"SHARP RACE TAPER WEEK — Flush legs, fully top off glycogen reserves"},
             {Week:12,Run:44,Date:"03/08/2026",Days_Since_Surgery:182,Day:"Mon",Phase:"Oxford Ultra race week",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
             {Week:12,Run:45,Date:"04/08/2026",Days_Since_Surgery:183,Day:"Tue",Phase:"Oxford Ultra race week",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Technical trail / Hilly terrain",Notes:"Taper: keep fresh, no deep fatigue"},
-            {Week:21,Run:46,Date:"07/08/2026",Days_Since_Surgery:186,Day:"Fri",Phase:"Oxford Ultra Race",Type:"Race",Distance_km:79,Pace:"Race Pace",Terrain:"Race course",Notes:"MTC Oxford Ultra (Target Race)"},
+            {Week:12,Run:46,Date:"07/08/2026",Days_Since_Surgery:186,Day:"Fri",Phase:"Oxford Ultra Race",Type:"Race",Distance_km:79,Pace:"Race Pace",Terrain:"Race course",Notes:"MTC Oxford Ultra (Target Race)"},
             {Week:13,Run:47,Date:"10/08/2026",Days_Since_Surgery:189,Day:"Mon",Phase:"Recovery/reset",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
             {Week:13,Run:48,Date:"11/08/2026",Days_Since_Surgery:190,Day:"Tue",Phase:"Recovery/reset",Type:"Hill quality",Distance_km:7,Pace:"Controlled uphill reps",Terrain:"Hill route / track / measured path",Notes:"Short hill reps, keep fatigue low"},
             {Week:13,Run:49,Date:"13/08/2026",Days_Since_Surgery:192,Day:"Thu",Phase:"Recovery/reset",Type:"Steady",Distance_km:14,Pace:"6:15-7:15/km",Terrain:"Technical Trail (Light)",Notes:"Bridge Session: Low-intensity technical trail movement to keep glutes/calves active for Kranjska"},
@@ -518,7 +504,7 @@
             {Week:17,Run:66,Date:"12/09/2026",Days_Since_Surgery:222,Day:"Sat",Phase:"Trail speed build",Type:"Long",Distance_km:30,Pace:"6:15-7:15/km",Terrain:"Steep Technical Trails / Maximum Elevation",Notes:"Specificity stacking: climbing/descending economy for Kranjska"},
             {Week:18,Run:67,Date:"14/09/2026",Days_Since_Surgery:224,Day:"Mon",Phase:"Kranjska taper/race week",Type:"Zone 2",Distance_km:8,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
             {Week:18,Run:68,Date:"15/09/2026",Days_Since_Surgery:225,Day:"Tue",Phase:"Kranjska taper/race week",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / measured path",Notes:"Taper: short hill work, low fatigue"},
-            {Week:21,Run:69,Date:"20/09/2026",Days_Since_Surgery:230,Day:"Sun",Phase:"Kranjska Race",Type:"Race",Distance_km:25,Pace:"Race Pace",Terrain:"Mountain trail course",Notes:"Kranjska Gora 25KM"},
+            {Week:18,Run:69,Date:"20/09/2026",Days_Since_Surgery:230,Day:"Sun",Phase:"Kranjska Race",Type:"Race",Distance_km:25,Pace:"Race Pace",Terrain:"Mountain trail course",Notes:"Kranjska Gora 25KM"},
             {Week:19,Run:70,Date:"21/09/2026",Days_Since_Surgery:231,Day:"Mon",Phase:"Bournemouth build/taper",Type:"Zone 2",Distance_km:10,Pace:"6:15-6:50/km",Terrain:"Zone 2 Heart Rate Goal: 60-75% of Max HR",Notes:"Recovery + mobility"},
             {Week:19,Run:71,Date:"22/09/2026",Days_Since_Surgery:232,Day:"Tue",Phase:"Bournemouth build/taper",Type:"Hill quality",Distance_km:7,Pace:"4:20-5:15/km reps",Terrain:"Hill route / track / measured path",Notes:"Hill reps, VO2, or cruise intervals"},
             {Week:19,Run:72,Date:"24/09/2026",Days_Since_Surgery:234,Day:"Thu",Phase:"Bournemouth build/taper",Type:"Progression Steady",Distance_km:16,Pace:"Finish last 5km at 5:12/km",Terrain:"Rolling road or trail",Notes:"Blend ultra stamina with half-marathon rhythm"},
@@ -620,7 +606,7 @@
                         </div>
                         <div class="mobile-main">
                             <div><div class="distance">${r.Distance_km}km (${mi}mi)</div></div>
-                            <div><div class="run-time">${r.Pace || '-'}</div></div>
+                            <div><div class="pace">${r.Pace || '-'}</div></div>
                         </div>
                         <div class="mobile-full"><div class="terrain">${r.Terrain || '-'}</div></div>
                         <div class="mobile-full"><div class="notes">${r.Notes || '-'}</div></div>
