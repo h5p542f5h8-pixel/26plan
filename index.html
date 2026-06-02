@@ -536,7 +536,7 @@
 
         let currentEditIndex = null, draggedIndex = null, showCompleted = false;
 
-        // Parse pace string and calculate estimated time using AVERAGE pace
+        // Parse pace string and calculate estimated time using SLOWEST pace
         function estimateRunTime(distance, pace) {
             if (!pace || !distance) return null;
             
@@ -552,10 +552,10 @@
                 return minutes + (seconds / 60);
             });
             
-            // Calculate average pace
-            const averagePace = paces.reduce((a, b) => a + b, 0) / paces.length;
+            // Use slowest pace (maximum value) for conservative estimation
+            const slowestPace = Math.max(...paces);
             
-            const totalMinutes = distance * averagePace;
+            const totalMinutes = distance * slowestPace;
             const hours = Math.floor(totalMinutes / 60);
             const mins = Math.round(totalMinutes % 60);
             
