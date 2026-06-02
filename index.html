@@ -97,6 +97,23 @@
             background: #218838;
         }
 
+        button.nav-btn {
+            background: #ffc107;
+            color: #333;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button.nav-btn:hover {
+            background: #ffb300;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
         .content {
             padding: 20px;
         }
@@ -347,6 +364,14 @@
             text-align: center;
             font-size: 0.9em;
         }
+
+        .nav-links-section {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -379,6 +404,8 @@
             <button onclick="resetFilters()">Reset</button>
             <button class="secondary" onclick="toggleShowCompleted()" id="toggleBtn">🙈 Hide</button>
             <button class="secondary" onclick="exportToCSV()">📥 CSV</button>
+            <button class="nav-btn" onclick="window.location.href='index.html'">📋 Plan</button>
+            <button class="nav-btn" onclick="window.location.href='fueling.html'">🍯 Fueling</button>
         </div>
 
         <div class="content">
